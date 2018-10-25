@@ -6,8 +6,10 @@ about: User Story Template
 
 As a 
 
-**Tasks:**
+# Tasks:
  - 
 
-**Tests:**
+# Tests:
  -
+
+**Priority:** (Highest/High/Medium/Low/Lowest)
