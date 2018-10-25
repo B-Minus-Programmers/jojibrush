@@ -1,4 +1,5 @@
-# 2D Graphics Modeler Inc.
+![Jojibrush](https://i.imgur.com/ArdFWg6.png)
+# Jojibrush
 
 ## By the B- Programmers
 
