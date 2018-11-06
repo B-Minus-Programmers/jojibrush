@@ -30,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.hpp \
+        utils/vector.hpp \
         shapes/shape.hpp
 
 FORMS += \
