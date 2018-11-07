@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+        utils/algorithms.cpp \
         shapes/shape.cpp
 
 HEADERS += \
         mainwindow.hpp \
         utils/vector.hpp \
+        utils/algorithms.hpp \
         shapes/shape.hpp
 
 FORMS += \
