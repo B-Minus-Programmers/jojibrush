@@ -27,13 +27,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         utils/algorithms.cpp \
+        Canvas.cpp \
         shapes/shape.cpp
 
 HEADERS += \
         mainwindow.hpp \
         utils/vector.hpp \
         utils/algorithms.hpp \
+        Canvas.hpp \
         shapes/shape.hpp
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

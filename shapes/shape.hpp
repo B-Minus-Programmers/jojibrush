@@ -2,6 +2,7 @@
 #include <QWidget>
 #include <QPoint>
 #include <QString>
+#include <QPainter>
 #include <string>
 
 namespace jbrush
@@ -20,7 +21,7 @@ public:
     void   setPosition(QPoint);
 
     /* Render */
-    virtual void draw(QWidget&) const = 0;
+    virtual void draw(QPainter&) const = 0;
 
     /* Shape Information */
     unsigned int getId() const;
