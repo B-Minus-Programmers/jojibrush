@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>images/jojibrushdarkicon.png</file>
+        <file>images/jojibrushicon.png</file>
+    </qresource>
+</RCC>

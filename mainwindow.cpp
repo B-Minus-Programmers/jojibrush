@@ -1,6 +1,5 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
-
 #include "Canvas.hpp"
 
 using jbrush::Canvas;

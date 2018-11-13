@@ -28,17 +28,21 @@ SOURCES += \
         mainwindow.cpp \
         utils/algorithms.cpp \
         Canvas.cpp \
-        shapes/shape.cpp
+        shapes/shape.cpp \
+        loginwindow.cpp
 
 HEADERS += \
         mainwindow.hpp \
         utils/vector.hpp \
         utils/algorithms.hpp \
         Canvas.hpp \
-        shapes/shape.hpp
+        shapes/shape.hpp \
+        loginwindow.hpp
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        loginwindow.ui
 
 RESOURCES += \
+    login.qrc \
     resources.qrc
