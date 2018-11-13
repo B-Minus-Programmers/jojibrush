@@ -1,9 +1,8 @@
 #pragma once
-#include <QWidget>
 #include <QPoint>
 #include <QString>
 #include <QPainter>
-#include <string>
+#include <QtMath>
 
 namespace jbrush
 {
@@ -11,23 +10,23 @@ class Shape
 {
 public:
     /* Constructors */
-    Shape(QPoint);
+    Shape(const QPoint&);
 
     /* Destructor */
     virtual ~Shape();
 
     /* Position */
     QPoint getPosition() const;
-    void   setPosition(QPoint);
+    void   setPosition(const QPoint&);
 
     /* Render */
     virtual void draw(QPainter&) const = 0;
 
     /* Shape Information */
-    unsigned int getId() const;
-    virtual unsigned int area()      const = 0;
-    virtual unsigned int perimeter() const = 0;
-    virtual std::string  toString()  const = 0;
+    uint32_t getId() const;
+    virtual double area() const = 0;
+    virtual double perimeter() const = 0;
+    virtual std::string toString() const = 0;
     QString toQString() const;
 
     /* Operators */
@@ -42,12 +41,15 @@ public:
     Shape(const Shape&) = delete;
     void operator=(const Shape&) = delete;
 
+protected:
+    /* Shape Data */
+    QPoint position;
+
 private:
     /* Static Variables */
-    static unsigned int nextId;
+    static uint32_t nextId;
 
     /* Shape Data */
-    unsigned int id;
-    QPoint position;
+    uint32_t id;
 };
 }

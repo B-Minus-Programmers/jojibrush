@@ -1,4 +1,5 @@
 #include "Canvas.hpp"
+#include <QPainter>
 
 using jbrush::Canvas;
 

@@ -1,12 +1,12 @@
-#include "shape.hpp"
+#include "Shape.hpp"
 
 namespace jbrush
 {
 /* Static Variables */
-unsigned int Shape::nextId = 0;
+uint32_t Shape::nextId = 0;
 
 /* Constructors */
-Shape::Shape(QPoint point) : id(nextId), position(point)
+Shape::Shape(const QPoint& pos) : position(pos), id(nextId)
 {
     nextId++;
 }
@@ -20,13 +20,13 @@ QPoint Shape::getPosition() const
     return position;
 }
 
-void Shape::setPosition(QPoint point)
+void Shape::setPosition(const QPoint& point)
 {
     position = point;
 }
 
 /* Shape Information */
-unsigned int Shape::getId() const
+uint32_t Shape::getId() const
 {
     return id;
 }
