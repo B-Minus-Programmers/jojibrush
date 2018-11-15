@@ -3,7 +3,7 @@
 #include <QPainter>
 
 #include "utils/vector.hpp"
-#include "shapes/shape.hpp"
+#include "shapes/Shape.hpp"
 
 using jbrush::Vector;
 using jbrush::Shape;
