@@ -53,6 +53,17 @@ double Text::perimeter() const
 
 std::string Text::toString() const
 {
-    return "";
+    return "Shape Id: " + std::to_string(getId()) + "\n" +
+           "ShapeType: Text\n" +
+           "ShapeDimensions: " +
+           std::to_string(position.x())  + ", " +
+           std::to_string(position.y())  + "\n" +
+           "TextString: " + text.toStdString() + "\n" +
+           "TextColor: \n" +
+           "TextAlignment: \n" +
+           "TextPointSize: \n" +
+           "TextFontFamily: \n" +
+           "TextFontStyle: \n"
+           "TextFontWeight: \n";
 }
 }

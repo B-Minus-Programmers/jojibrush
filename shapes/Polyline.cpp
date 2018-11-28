@@ -63,6 +63,21 @@ double Polyline::perimeter() const
 
 std::string Polyline::toString() const
 {
-    return "";
+    std::string dimensions;
+
+    for(uint32_t i = 0; i < pointCount; i++)
+    {
+        dimensions += std::to_string(points[i].x()) + ", " + std::to_string(points[i].y());
+        dimensions += (i != pointCount - 1? ", " : "\n");
+    }
+
+    return "Shape Id: " + std::to_string(getId()) + "\n" +
+           "ShapeType: Polyline\n" +
+           "ShapeDimensions: " + dimensions +
+           "PenColor: \n" +
+           "PenWidth: \n" +
+           "PenStyle: \n" +
+           "PenCapStyle: \n" +
+           "PenJoinStyle: \n";
 }
 }

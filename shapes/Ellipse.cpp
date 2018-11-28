@@ -42,19 +42,32 @@ void Ellipse::draw(QPainter& qp) const
 /* Ellipse Information */
 double Ellipse::area() const
 {
-    return M_PI * width * height / 4;
+    return qFabs(M_PI * width * height / 4);
 }
 
 double Ellipse::perimeter() const
 {
-    double a = width / 2;
-    double b = height / 2;
+    double a = qFabs(width / 2);
+    double b = qFabs(height / 2);
 
     return M_PI * (3 * (a + b) - qSqrt((3 * a + b) * (a + 3 * b)));
 }
 
 std::string Ellipse::toString() const
 {
-    return "";
+    return "Shape Id: " + std::to_string(getId()) + "\n" +
+           "ShapeType: Ellipse\n" +
+           "ShapeDimensions: " +
+           std::to_string(position.x()) + ", " +
+           std::to_string(position.y()) + ", " +
+           std::to_string(width / 2)    + ", " +
+           std::to_string(height / 2)   + "\n" +
+           "PenColor: \n" +
+           "PenWidth: \n" +
+           "PenStyle: \n" +
+           "PenCapStyle: \n" +
+           "PenJoinStyle: \n" +
+           "BrushColor: \n" +
+           "BrushStyle: \n";
 }
 }

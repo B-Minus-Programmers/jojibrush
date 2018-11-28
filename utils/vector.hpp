@@ -188,9 +188,8 @@ template<class T>
 void Vector<T>::clear()
 {
     size = 0;
-    capacity = 0;
     delete[] array;
-    array = nullptr;
+    array = new T[capacity];
 }
 
 /* Operator Overloads */

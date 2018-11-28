@@ -23,7 +23,7 @@ public:
     /* Render */
     virtual void draw(QPainter&) const override;
 
-    /* Polyline Information */
+    /* Polygon Information */
     virtual double area() const override;
     virtual double perimeter() const override;
     virtual std::string toString() const override;

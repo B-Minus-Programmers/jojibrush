@@ -49,16 +49,29 @@ void Rect::draw(QPainter& qp) const
 /* Rect information */
 double Rect::area() const
 {
-    return width * height;
+    return qFabs(width * height);
 }
 
 double Rect::perimeter() const
 {
-    return (width + height) * 2;
+    return qFabs((width + height) * 2);
 }
 
 std::string Rect::toString() const
 {
-    return "";
+    return "Shape Id: " + std::to_string(getId()) + "\n" +
+           "ShapeType: Rectangle\n" +
+           "ShapeDimensions: " +
+           std::to_string(position.x()) + ", " +
+           std::to_string(position.y()) + ", " +
+           std::to_string(width)        + ", " +
+           std::to_string(height)       + "\n" +
+           "PenColor: \n" +
+           "PenWidth: \n" +
+           "PenStyle: \n" +
+           "PenCapStyle: \n" +
+           "PenJoinStyle: \n" +
+           "BrushColor: \n" +
+           "BrushStyle: \n";
 }
 }

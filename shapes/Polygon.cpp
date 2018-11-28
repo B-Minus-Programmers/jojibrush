@@ -50,10 +50,17 @@ void Polygon::draw(QPainter& qp) const
     qp.drawPolygon(points, static_cast<int>(pointCount));
 }
 
-/* Polyline Information */
+/* Polygon Information */
 double Polygon::area() const
 {
-    return -1;
+    double area = 0;
+
+    for(uint32_t i = 0; i < pointCount; i++)
+    {
+        area += points[i].x() * points[(i + 1) % pointCount].y() - points[(i + 1) % pointCount].x() * points[i].y();
+    }
+
+    return qFabs(area / 2.0);
 }
 
 double Polygon::perimeter() const
@@ -62,7 +69,7 @@ double Polygon::perimeter() const
 
     for(uint32_t i = 0; i < pointCount; i++)
     {
-        QPoint resultant = points[i] - points[i + 1];
+        QPoint resultant = points[i] - points[(i + 1) % pointCount];
         perimeter += qSqrt(qPow(resultant.x(),2) + qPow(resultant.y(),2));
     }
 
@@ -71,6 +78,23 @@ double Polygon::perimeter() const
 
 std::string Polygon::toString() const
 {
-    return "";
+    std::string dimensions;
+
+    for(uint32_t i = 0; i < pointCount; i++)
+    {
+        dimensions += std::to_string(points[i].x()) + ", " + std::to_string(points[i].y());
+        dimensions += (i != pointCount - 1? ", " : "\n");
+    }
+
+    return "Shape Id: " + std::to_string(getId()) + "\n" +
+           "ShapeType: Polygon\n" +
+           "ShapeDimensions: " + dimensions +
+           "PenColor: \n" +
+           "PenWidth: \n" +
+           "PenStyle: \n" +
+           "PenCapStyle: \n" +
+           "PenJoinStyle: \n" +
+           "BrushColor: \n" +
+           "BrushStyle: \n";
 }
 }

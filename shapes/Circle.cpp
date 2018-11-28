@@ -32,16 +32,28 @@ void Circle::draw(QPainter& qp) const
 /* Circle Information */
 double Circle::area() const
 {
-    return M_PI * radius * radius;
+    return qFabs(M_PI * radius * radius);
 }
 
 double Circle::perimeter() const
 {
-    return 2 * M_PI * radius;
+    return qFabs(2 * M_PI * radius);
 }
 
 std::string Circle::toString() const
 {
-    return "";
+    return "Shape Id: " + std::to_string(getId()) + "\n" +
+           "ShapeType: Circle\n" +
+           "ShapeDimensions: " +
+           std::to_string(position.x()) + ", " +
+           std::to_string(position.y()) + ", " +
+           std::to_string(radius)       + "\n" +
+           "PenColor: \n" +
+           "PenWidth: \n" +
+           "PenStyle: \n" +
+           "PenCapStyle: \n" +
+           "PenJoinStyle: \n" +
+           "BrushColor: \n" +
+           "BrushStyle: \n";
 }
 }
