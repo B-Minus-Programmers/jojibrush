@@ -4,6 +4,12 @@
 
 namespace jbrush
 {
+
+/**
+ * Templated Vector class
+ * 
+ * Represents a resizable, dynamic array of elements. Lookups are O(1), inserts are O(n)
+ */
 template<class T>
 class Vector
 {
@@ -14,24 +20,82 @@ public:
     using const_iterator  = const T*;
     
     /* Constructors */
+
+    /**
+     * Creates a default vector with space for 16 elements
+     */
     Vector();
-    Vector(const Vector<T>&);
-    Vector(Vector<T>&&);
-    explicit Vector(uint32_t);
+
+    /**
+     * Copies an existing vector into this vector
+     * @param vec Existing vector to copy
+     */
+    Vector(const Vector<T>& vec);
+
+    /**
+     * Moves an existing vector into this vector. Note that the existing vector will be destroyed
+     * @param vec Existing vector to move from, then destroy
+     */
+    Vector(Vector<T>&& vec);
+
+    /**
+     * Initializes a Vector with a specific capacity
+     * @param capacity Starting capacity of the vector
+     */
+    explicit Vector(uint32_t capacity);
     
     /* Destructor */
     ~Vector();
     
     /* Capacity */
+
+    /**
+     * Returns the number of elements in the vector
+     * @returns the number of elements currently in the vector
+     */
     uint32_t getSize() const;
+
+    /**
+     * Returns the maximum number of elements the vector can hold without needing to be resized
+     * @returns the maximum capacity of the vector
+     */
     uint32_t getCapacity() const;
-    void resize(uint32_t);
-    void resize(uint32_t, const T&);
-    void reserve(uint32_t);
+
+    /**
+     * Increases or decreases the vector's capacity
+     * @param capacity the new vector capacity
+     */
+    void resize(uint32_t capacity);
+
+    /**
+     * Increases or decreases the vector's capacity, adding an element to added spaces
+     * @param capacity the new vector capacity
+     * @param filler the value to fill new spaces with
+     */
+    void resize(uint32_t capacity, const T& filler);
+
+    /**
+     * Reserves more space for a vector, without adding or removing data
+     * @param capacity the new vector capacity
+     */
+    void reserve(uint32_t capacity);
     
     /* Member Functions */
-    void push_back(const T&);
+
+    /**
+     * Adds an element to the end of the vector
+     * @param element element to add to the vector
+     */
+    void push_back(const T& element);
+
+    /**
+     * Removes the last element in the vector
+     */
     void pop_back();
+
+    /**
+     * Removes all elements from the vector
+     */
     void clear();
     
     /* Operator Overloads */
@@ -40,12 +104,43 @@ public:
     reference  operator[](uint32_t);
     
     /* Iterators */
+
+    /**
+     * Returns a pointer to the beginning of the vector
+     * @returns pointer to the first element
+     */
     iterator begin();
+
+    /**
+     * Returns a pointer to the end of the vector
+     * @returns pointer to the after-last element
+     */
     iterator end();
+
+    /**
+     * Returns a constant pointer to the beginning of the vector
+     * @returns constant pointer to the first element
+     */
     const_iterator begin() const;
-    const_iterator end()   const;
-    void erase(uint32_t);
-    void insert(uint32_t, const T&);
+
+    /**
+     * Returns a constant pointer to the end of the vector
+     * @returns constant pointer to the after-last element
+     */
+    const_iterator end() const;
+
+    /**
+     * Removes a single element from the vector, re-organizing subsequent elements to fill the gap
+     * @param position position of the element to remove
+     */
+    void erase(uint32_t position);
+
+    /**
+     * Adds a single element at a position, re-organizing subsequent elements so that no data is lost
+     * @param position position to insert the new element at
+     * @param element element to insert
+     */
+    void insert(uint32_t position, const T& element);
     
 private:
     /* Data */
