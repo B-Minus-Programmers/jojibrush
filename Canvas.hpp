@@ -3,6 +3,7 @@
 #include <QPainter>
 
 #include "utils/vector.hpp"
+#include "utils/FileHandler.hpp"
 #include "shapes/Shape.hpp"
 
 using jbrush::Vector;
@@ -21,8 +22,15 @@ public:
 
     Vector<Shape*> getShapes();
 
+    bool loadFromFile(QString& file);
+        // Gets shapes from file at the directory specified and draws them to the screen
+        // Returns true if the load was successful, false otherwise
+        // Current shapes are unmodified if the load fails
+
     void addShape(Shape*);
     void removeShape(uint32_t);
+
+    void clearShapes();
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };

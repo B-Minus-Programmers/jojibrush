@@ -1,6 +1,9 @@
 #include "algorithms.hpp"
+#include <QDebug>
 
 using jbrush::Comparator;
+
+namespace jbrush {
 
 int compareId(const Shape* a, const Shape* b)
 {
@@ -17,7 +20,7 @@ int comparePerimeter(const Shape* a, const Shape* b)
     return a->perimeter() - b->perimeter();
 }
 
-void sort(Vector<Shape*>& vector, Comparator cmp) 
+void sort(Vector<Shape*>& vector, Comparator cmp)
 {
     uint32_t min;
     for (uint32_t i = 0; i < vector.getSize() - 1; i++)
@@ -34,3 +37,17 @@ void sort(Vector<Shape*>& vector, Comparator cmp)
         std::swap(vector[min], vector[i]);
     }
 }
+
+// Moves the text stream up to the character specified
+void getTo(QTextStream &qin, const QChar &target)
+{
+    QChar buffer;
+
+    do
+    {
+        qin >> buffer;
+    }while(buffer != target && !qin.atEnd());
+}
+
+}
+

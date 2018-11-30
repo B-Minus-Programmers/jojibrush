@@ -1,5 +1,7 @@
 #include "Canvas.hpp"
+#include "utils/exceptions.hpp"
 #include <QPainter>
+#include <QDebug>
 
 using jbrush::Canvas;
 
@@ -12,15 +14,37 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent)
 Canvas::~Canvas()
 {
     // Free all shapes when deleted. Vector class will delete dynamic array
-    for (auto shapePtr : this->shapes)
-    {
-        delete shapePtr;
-    }
+    clearShapes();
 }
 
 Vector<Shape*> Canvas::getShapes()
 {
-    return this->shapes;
+    return shapes;
+}
+
+bool Canvas::loadFromFile(QString &fileDir)
+{
+    FileHandler fileUtil;
+    Vector<Shape*> shapesLoaded;    // Shapes loaded by the file utility
+
+    // Load the shapes
+    shapesLoaded = fileUtil.loadShapesFromFile(fileDir);
+
+    // If shapes were actually loaded from the file, update current shapes
+    if(shapesLoaded.getSize() > 0)
+    {
+        clearShapes();
+        shapes = shapesLoaded;
+        repaint();
+
+        // Return true - load successful
+        return true;
+    }
+    else
+    {
+        // Otherwise, if load size is less than or equal to zero, return false - load failed
+        return false;
+    }
 }
 
 void Canvas::addShape(Shape *shape) 
@@ -38,6 +62,18 @@ void Canvas::removeShape(uint32_t id)
             return;
         }
     }
+}
+
+void Canvas::clearShapes()
+{   
+    // Deallocate space for the shape pointers
+    for (auto shapePtr : shapes)
+    {
+        delete shapePtr;
+    }
+
+    // Clear out the shape vector
+    shapes.clear();
 }
 
 void Canvas::paintEvent(QPaintEvent*)

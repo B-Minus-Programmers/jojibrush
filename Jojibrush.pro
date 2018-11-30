@@ -28,7 +28,6 @@ SOURCES += \
         mainwindow.cpp \
         utils/algorithms.cpp \
         Canvas.cpp \
-        loginwindow.cpp \
         shapes/Rect.cpp \
         shapes/Ellipse.cpp \
         shapes/Circle.cpp \
@@ -36,14 +35,16 @@ SOURCES += \
         shapes/Polyline.cpp \
         shapes/Polygon.cpp \
         shapes/Shape.cpp \
-        shapes/Text.cpp
+        shapes/Text.cpp \
+        loginwindow.cpp \
+        utils/FileHandler.cpp \
+        utils/exceptions.cpp
 
 HEADERS += \
         mainwindow.hpp \
         utils/vector.hpp \
         utils/algorithms.hpp \
         Canvas.hpp \
-        loginwindow.hpp \
         shapes/Rect.hpp \
         shapes/Ellipse.hpp \
         shapes/Circle.hpp \
@@ -52,7 +53,11 @@ HEADERS += \
         shapes/Shapes.hpp \
         shapes/Polygon.hpp \
         shapes/Shape.hpp \
-        shapes/Text.hpp
+        shapes/Text.hpp \
+        utils/exceptions.hpp \
+        loginwindow.hpp \
+        utils/FileHandler.hpp \
+        utils/algorithms.hpp
 
 FORMS += \
         mainwindow.ui \

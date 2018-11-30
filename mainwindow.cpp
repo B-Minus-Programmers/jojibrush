@@ -1,6 +1,5 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
-#include "Canvas.hpp"
 #include "shapes/Rect.hpp"
 
 using jbrush::Canvas;
@@ -11,23 +10,30 @@ using jbrush::Canvas;
 using jbrush::Canvas;
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent), ui(new Ui::MainWindow), canvas(new jbrush::Canvas)
 {
     setWindowIcon(QIcon(":/resources/icon.png"));
     ui->setupUi(this);
 
-    Canvas *canvas = new Canvas;
-    MainWindow::setCentralWidget(canvas);
-
-    QPoint p1(100,100);
-    QPoint p2(200,200);
-    jbrush::Shape* shape = new jbrush::Rect(p1,p2);
-
-    canvas->addShape(shape);
+    setCentralWidget(canvas);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete canvas;
+}
+
+void MainWindow::on_actionLoad_triggered()
+{
+    QString fileDir;    // Directory of the file to load
+
+    // Bring up a panel for the user to select a directory
+    fileDir = QFileDialog::getOpenFileName(this, "Open", currentFile, "Jojibrush files (*" + jbrush::jconstants::FILE_EXTENSION + ")");
+
+    // If loading to the canvas is successful, update the current file
+    if(canvas->loadFromFile(fileDir))
+    {
+        currentFile = fileDir;
+    }
 }

@@ -30,9 +30,8 @@ int main(int argc, char *argv[])
     QTimer::singleShot(1500,splash,SLOT(close()));
 
     MainWindow w;
-
     Login l(&w);
-    QTimer::singleShot(1500, &l,SLOT(show()));
+    QTimer::singleShot(1500, &l, SLOT(show()));
 
     return a.exec();
 }
