@@ -52,17 +52,17 @@ double Line::perimeter() const
 
 std::string Line::toString() const
 {
-    return "Shape Id: " + std::to_string(getId()) + "\n" +
-           "ShapeType: Line\n" +
+    return "Shape Id: " + std::to_string(getId()) + "\r\n" +
+           "ShapeType: Line\r\n" +
            "ShapeDimensions: " +
            std::to_string(position.x()) + ", " +
            std::to_string(position.y()) + ", " +
            std::to_string(end.x())      + ", " +
-           std::to_string(end.y())      + "\n" +
-           "PenColor: \n" +
-           "PenWidth: \n" +
-           "PenStyle: \n" +
-           "PenCapStyle: \n" +
-           "PenJoinStyle: \n";
+           std::to_string(end.y())      + "\r\n" +
+           "PenColor: \r\n" +
+           "PenWidth: \r\n" +
+           "PenStyle: \r\n" +
+           "PenCapStyle: \r\n" +
+           "PenJoinStyle: \r\n";
 }
 }

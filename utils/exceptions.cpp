@@ -1,5 +1,6 @@
 #include "utils/exceptions.hpp"
 #include <QTextStream>
+#include <QIcon>
 
 namespace jbrush {
 
@@ -20,7 +21,9 @@ QString GeneralException::errorMessage() const
 }
 void GeneralException::errorWindow() const
 {
-    QMessageBox::critical(nullptr, "Error", message);
+    QMessageBox error(QMessageBox::Critical, "Error", message);
+    error.setWindowIcon(QIcon(":/resources/icon.png"));
+    error.exec();
 }
 
 // BAD FILE DEFS

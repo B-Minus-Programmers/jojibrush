@@ -55,19 +55,19 @@ double Ellipse::perimeter() const
 
 std::string Ellipse::toString() const
 {
-    return "Shape Id: " + std::to_string(getId()) + "\n" +
-           "ShapeType: Ellipse\n" +
+    return "Shape Id: " + std::to_string(getId()) + "\r\n" +
+           "ShapeType: Ellipse\r\n" +
            "ShapeDimensions: " +
            std::to_string(position.x()) + ", " +
            std::to_string(position.y()) + ", " +
            std::to_string(width / 2)    + ", " +
-           std::to_string(height / 2)   + "\n" +
-           "PenColor: \n" +
-           "PenWidth: \n" +
-           "PenStyle: \n" +
-           "PenCapStyle: \n" +
-           "PenJoinStyle: \n" +
-           "BrushColor: \n" +
-           "BrushStyle: \n";
+           std::to_string(height / 2)   + "\r\n" +
+           "PenColor: \r\n" +
+           "PenWidth: \r\n" +
+           "PenStyle: \r\n" +
+           "PenCapStyle: \r\n" +
+           "PenJoinStyle: \r\n" +
+           "BrushColor: \r\n" +
+           "BrushStyle: \r\n";
 }
 }

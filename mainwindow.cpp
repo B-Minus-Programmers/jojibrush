@@ -32,8 +32,11 @@ void MainWindow::on_actionLoad_triggered()
     fileDir = QFileDialog::getOpenFileName(this, "Open", currentFile, "Jojibrush files (*" + jbrush::jconstants::FILE_EXTENSION + ")");
 
     // If loading to the canvas is successful, update the current file
-    if(canvas->loadFromFile(fileDir))
+    if(!fileDir.isEmpty())
     {
-        currentFile = fileDir;
+        if(canvas->loadFromFile(fileDir))
+        {
+            currentFile = fileDir;
+        }
     }
 }

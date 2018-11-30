@@ -3,7 +3,7 @@
 #include <functional>
 #include <QTextStream>
 
-#include "../shapes/shape.hpp"
+#include "../shapes/Shape.hpp"
 #include "vector.hpp"
 
 using jbrush::Vector;

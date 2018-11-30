@@ -68,16 +68,16 @@ std::string Polyline::toString() const
     for(uint32_t i = 0; i < pointCount; i++)
     {
         dimensions += std::to_string(points[i].x()) + ", " + std::to_string(points[i].y());
-        dimensions += (i != pointCount - 1? ", " : "\n");
+        dimensions += (i != pointCount - 1? ", " : "\r\n");
     }
 
-    return "Shape Id: " + std::to_string(getId()) + "\n" +
-           "ShapeType: Polyline\n" +
+    return "Shape Id: " + std::to_string(getId()) + "\r\n" +
+           "ShapeType: Polyline\r\n" +
            "ShapeDimensions: " + dimensions +
-           "PenColor: \n" +
-           "PenWidth: \n" +
-           "PenStyle: \n" +
-           "PenCapStyle: \n" +
-           "PenJoinStyle: \n";
+           "PenColor: \r\n" +
+           "PenWidth: \r\n" +
+           "PenStyle: \r\n" +
+           "PenCapStyle: \r\n" +
+           "PenJoinStyle: \r\n";
 }
 }

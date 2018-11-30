@@ -83,18 +83,18 @@ std::string Polygon::toString() const
     for(uint32_t i = 0; i < pointCount; i++)
     {
         dimensions += std::to_string(points[i].x()) + ", " + std::to_string(points[i].y());
-        dimensions += (i != pointCount - 1? ", " : "\n");
+        dimensions += (i != pointCount - 1? ", " : "\r\n");
     }
 
-    return "Shape Id: " + std::to_string(getId()) + "\n" +
-           "ShapeType: Polygon\n" +
+    return "Shape Id: " + std::to_string(getId()) + "\r\n" +
+           "ShapeType: Polygon\r\n" +
            "ShapeDimensions: " + dimensions +
-           "PenColor: \n" +
-           "PenWidth: \n" +
-           "PenStyle: \n" +
-           "PenCapStyle: \n" +
-           "PenJoinStyle: \n" +
-           "BrushColor: \n" +
-           "BrushStyle: \n";
+           "PenColor: \r\n" +
+           "PenWidth: \r\n" +
+           "PenStyle: \r\n" +
+           "PenCapStyle: \r\n" +
+           "PenJoinStyle: \r\n" +
+           "BrushColor: \r\n" +
+           "BrushStyle: \r\n";
 }
 }

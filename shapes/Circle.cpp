@@ -42,18 +42,18 @@ double Circle::perimeter() const
 
 std::string Circle::toString() const
 {
-    return "Shape Id: " + std::to_string(getId()) + "\n" +
-           "ShapeType: Circle\n" +
+    return "Shape Id: " + std::to_string(getId()) + "\r\n" +
+           "ShapeType: Circle\r\n" +
            "ShapeDimensions: " +
            std::to_string(position.x()) + ", " +
            std::to_string(position.y()) + ", " +
-           std::to_string(radius)       + "\n" +
-           "PenColor: \n" +
-           "PenWidth: \n" +
-           "PenStyle: \n" +
-           "PenCapStyle: \n" +
-           "PenJoinStyle: \n" +
-           "BrushColor: \n" +
-           "BrushStyle: \n";
+           std::to_string(radius)       + "\r\n" +
+           "PenColor: \r\n" +
+           "PenWidth: \r\n" +
+           "PenStyle: \r\n" +
+           "PenCapStyle: \r\n" +
+           "PenJoinStyle: \r\n" +
+           "BrushColor: \r\n" +
+           "BrushStyle: \r\n";
 }
 }
