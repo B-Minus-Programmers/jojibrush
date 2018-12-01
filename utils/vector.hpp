@@ -144,9 +144,9 @@ public:
     
 private:
     /* Data */
-    T* array;
     uint32_t size;
     uint32_t capacity;
+    T* array;
 };
 
 /* Constructors */
@@ -186,7 +186,7 @@ Vector<T>::Vector(uint32_t cap)
 template<class T>
 Vector<T>::~Vector()
 {
-    clear();
+    delete[] array;
 }
 
 /* Capacity */
@@ -350,11 +350,14 @@ const T* Vector<T>::end() const
 template <class T>
 void Vector<T>::erase(uint32_t position)
 {
-    for(uint32_t i = position; i < size; i++)
+    if(size != 0)
     {
-        array[i] = array [i + 1];
+        for(uint32_t i = position; i < size - 1; i++)
+        {
+            array[i] = array [i + 1];
+        }
+        size--;
     }
-    size--;
 }
 
 template<class T>
