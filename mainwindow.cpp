@@ -1,11 +1,7 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
-#include "shapes/Rect.hpp"
-
-using jbrush::Canvas;
-
 #include "Canvas.hpp"
-#include "shapes/Rect.hpp"
+#include "shapes/Shapes.hpp"
 
 using jbrush::Canvas;
 
@@ -15,7 +11,24 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowIcon(QIcon(":/resources/icon.png"));
     ui->setupUi(this);
 
-    setCentralWidget(canvas);
+    MainWindow::setCentralWidget(canvas);
+
+    QPoint p1(100,100);
+    QPoint p2(200,200);
+    jbrush::FilledShapeProperties props;
+    props.border.penCapStyle = Qt::PenCapStyle::FlatCap;
+    props.border.penColor = Qt::GlobalColor::blue;
+    props.border.penJoinStyle = Qt::PenJoinStyle::BevelJoin;
+    props.border.penStyle = Qt::PenStyle::DashLine;
+    props.border.penWidth = 10;
+    props.brushColor = Qt::GlobalColor::green;
+    props.brushStyle = Qt::BrushStyle::HorPattern;
+    jbrush::Shape* shape = new jbrush::Rectangle(p1, p2, props);
+
+    jbrush::Shape* defaultPropsShape = new jbrush::Ellipse(500, 200, 300, 100);
+
+    canvas->addShape(shape);
+    canvas->addShape(defaultPropsShape);
 }
 
 MainWindow::~MainWindow()

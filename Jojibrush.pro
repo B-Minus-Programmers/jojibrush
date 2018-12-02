@@ -27,37 +27,41 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         utils/algorithms.cpp \
+        utils/exceptions.cpp \
+        utils/FileHandler.cpp \
         Canvas.cpp \
-        shapes/Rect.cpp \
-        shapes/Ellipse.cpp \
+        loginwindow.cpp \
+        shapes/Shape.cpp \
+        shapes/GeometricShape.cpp \
+        shapes/FilledShape.cpp \
+        shapes/Rectangle.cpp \
         shapes/Circle.cpp \
+        shapes/Ellipse.cpp \
+        shapes/Polygon.cpp \
         shapes/Line.cpp \
         shapes/Polyline.cpp \
-        shapes/Polygon.cpp \
-        shapes/Shape.cpp \
-        shapes/Text.cpp \
-        loginwindow.cpp \
-        utils/FileHandler.cpp \
-        utils/exceptions.cpp
+        shapes/Text.cpp
 
 HEADERS += \
         mainwindow.hpp \
         utils/vector.hpp \
         utils/algorithms.hpp \
+        utils/exceptions.hpp \
+        utils/FileHandler.hpp \
         Canvas.hpp \
-        shapes/Rect.hpp \
-        shapes/Ellipse.hpp \
+        loginwindow.hpp \
+        shapes/Shapes.hpp \
+        shapes/Shape.hpp \
+        shapes/Properties.hpp \
+        shapes/GeometricShape.hpp \
+        shapes/FilledShape.hpp \
+        shapes/Rectangle.hpp \
         shapes/Circle.hpp \
+        shapes/Ellipse.hpp \
+        shapes/Polygon.hpp \
         shapes/Line.hpp \
         shapes/Polyline.hpp \
-        shapes/Shapes.hpp \
-        shapes/Polygon.hpp \
-        shapes/Shape.hpp \
-        shapes/Text.hpp \
-        utils/exceptions.hpp \
-        loginwindow.hpp \
-        utils/FileHandler.hpp \
-        utils/algorithms.hpp
+        shapes/Text.hpp
 
 FORMS += \
         mainwindow.ui \

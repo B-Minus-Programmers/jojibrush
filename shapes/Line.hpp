@@ -1,19 +1,19 @@
 #pragma once
-#include "Shape.hpp"
+#include "GeometricShape.hpp"
 
 namespace jbrush
 {
-class Line final : public Shape
+class Line final : public GeometricShape
 {
 public:
     /* Constructors */
-
     /**
      * Creates a line between two points
      * @param start one endpoint of the line, used as the line's position
      * @param end the other endpoint
+     * @param props the shape properties, which adjust shape color and style
      */
-    Line(const QPoint& start, const QPoint& end);
+    Line(const QPoint& start, const QPoint& end, GeometricShapeProperties props = DEFAULT_GEOMETRIC_PROPS);
 
     /**
      * Creates a line between two (x,y) coordinate pairs
@@ -21,8 +21,9 @@ public:
      * @param y1 y-coordinate of the first point
      * @param x2 x-coordinate of the second point
      * @param y2 y-coordinate of the second point
+     * @param props the shape properties, which adjust shape color and style
      */
-    Line(int x1, int y1, int x2, int y2);
+    Line(int x1, int y1, int x2, int y2, GeometricShapeProperties props = DEFAULT_GEOMETRIC_PROPS);
 
     /* Getters */
 

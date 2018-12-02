@@ -141,7 +141,7 @@ Shape *FileHandler::extractText(QTextStream& qin, QList<int>& dimensionsList)
     // Extract the text's font
     font = extractFont(qin);
 
-    return new Text(QPoint(dimensionsList[0], dimensionsList[1]), body, font);
+    return new Text(QPoint(dimensionsList[0], dimensionsList[1]), dimensionsList[2], dimensionsList[3], body);
 }
 
 QList<int> FileHandler::extractDimensions(QTextStream& qin, const QString& shapeType)
@@ -242,11 +242,11 @@ Shape *FileHandler::constructShape(QString& type, QList<int>& dimensions)
     }
     else if(type == jconstants::RECTANGLE)
     {
-        return new Rect(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[3]);
+        return new Rectangle(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[3]);
     }
     else if(type == jconstants::SQUARE)
     {
-        return new Rect(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[2]);
+        return new Rectangle(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[2]);
     }
     else if(type == jconstants::ELLIPSE)
     {

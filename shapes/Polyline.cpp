@@ -3,8 +3,8 @@
 namespace jbrush
 {
 /* Constructors */
-Polyline::Polyline(const QPoint* const pts, uint32_t count)
-        : Shape(pts[0]), points(new QPoint[count]), pointCount(count)
+Polyline::Polyline(const QPoint* const pts, uint32_t count, GeometricShapeProperties props)
+        : GeometricShape(pts[0], props), points(new QPoint[count]), pointCount(count)
 {
     for(uint32_t i = 0; i < pointCount; i++)
         points[i] = pts[i];
@@ -47,6 +47,7 @@ void Polyline::setPoint(uint32_t index, const QPoint& pt)
 /* Render */
 void Polyline::draw(QPainter& qp) const
 {
+    Shape::draw(qp);
     qp.drawPolyline(points, static_cast<int>(pointCount));
 }
 
@@ -73,11 +74,7 @@ std::string Polyline::toString() const
 
     return "Shape Id: " + std::to_string(getId()) + "\r\n" +
            "ShapeType: Polyline\r\n" +
-           "ShapeDimensions: " + dimensions +
-           "PenColor: \r\n" +
-           "PenWidth: \r\n" +
-           "PenStyle: \r\n" +
-           "PenCapStyle: \r\n" +
-           "PenJoinStyle: \r\n";
+           "ShapeDimensions: " + dimensions + "\r\n" +
+           stringifyProperties() + "\r\n";
 }
 }

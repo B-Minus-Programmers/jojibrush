@@ -3,12 +3,12 @@
 namespace jbrush
 {
 /* Constructors */
-Circle::Circle(const QPoint& center, int r)
-      : Shape(center), radius(r)
+Circle::Circle(const QPoint& center, int r, FilledShapeProperties props)
+      : FilledShape(center, props), radius(r)
 {}
 
-Circle::Circle(int x, int y, int r)
-      : Shape(QPoint(x,y)), radius(r)
+Circle::Circle(int x, int y, int r, FilledShapeProperties props)
+      : FilledShape(QPoint(x,y), props), radius(r)
 {}
 
 /* Getters */
@@ -26,6 +26,7 @@ void Circle::setRadius(int r)
 /* Render */
 void Circle::draw(QPainter& qp) const
 {
+    Shape::draw(qp);
     qp.drawEllipse(position, radius, radius);
 }
 
@@ -48,12 +49,6 @@ std::string Circle::toString() const
            std::to_string(position.x()) + ", " +
            std::to_string(position.y()) + ", " +
            std::to_string(radius)       + "\r\n" +
-           "PenColor: \r\n" +
-           "PenWidth: \r\n" +
-           "PenStyle: \r\n" +
-           "PenCapStyle: \r\n" +
-           "PenJoinStyle: \r\n" +
-           "BrushColor: \r\n" +
-           "BrushStyle: \r\n";
+           stringifyProperties() + "\r\n";
 }
 }

@@ -3,12 +3,12 @@
 namespace jbrush
 {
 /* Constructors */
-Line::Line(const QPoint& s, const QPoint& e)
-    : Shape(s), end(e)
+Line::Line(const QPoint& pos, const QPoint& e, GeometricShapeProperties props)
+    : GeometricShape(pos, props), end(e)
 {}
 
-Line::Line(int x1, int y1, int x2, int y2)
-    : Shape(QPoint(x1,y1)), end(QPoint(x2,y2))
+Line::Line(int x1, int y1, int x2, int y2, GeometricShapeProperties props)
+    : GeometricShape(QPoint(x1,y1), props), end(QPoint(x2,y2))
 {}
 
 /* Getters */
@@ -23,9 +23,9 @@ QPoint Line::getEnd() const
 }
 
 /* Setters */
-void Line::setStart(const QPoint& s)
+void Line::setStart(const QPoint& pos)
 {
-    position = s;
+    position = pos;
 }
 
 void Line::setEnd(const QPoint& e)
@@ -36,6 +36,7 @@ void Line::setEnd(const QPoint& e)
 /* Render */
 void Line::draw(QPainter& qp) const
 {
+    Shape::draw(qp);
     qp.drawLine(position, end);
 }
 
@@ -59,10 +60,6 @@ std::string Line::toString() const
            std::to_string(position.y()) + ", " +
            std::to_string(end.x())      + ", " +
            std::to_string(end.y())      + "\r\n" +
-           "PenColor: \r\n" +
-           "PenWidth: \r\n" +
-           "PenStyle: \r\n" +
-           "PenCapStyle: \r\n" +
-           "PenJoinStyle: \r\n";
+           stringifyProperties()        + "\r\n";
 }
 }

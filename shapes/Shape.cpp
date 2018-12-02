@@ -25,6 +25,11 @@ void Shape::setPosition(const QPoint& point)
     position = point;
 }
 
+void Shape::draw(QPainter& qp) const
+{
+    this->applyProperties(qp);
+}
+
 /* Shape Information */
 uint32_t Shape::getId() const
 {

@@ -8,7 +8,7 @@
 #include "Line.hpp"
 #include "Polyline.hpp"
 #include "Polygon.hpp"
-#include "Rect.hpp"
+#include "Rectangle.hpp"
 #include "Circle.hpp"
 #include "Ellipse.hpp"
 #include "Text.hpp"

@@ -3,8 +3,8 @@
 namespace jbrush
 {
 /* Constructors */
-Polygon::Polygon(const QPoint* const pts, uint32_t count)
-       : Shape(pts[0]), points(new QPoint[count]), pointCount(count)
+Polygon::Polygon(const QPoint* const pts, uint32_t count, FilledShapeProperties props)
+       : FilledShape(pts[0], props), points(new QPoint[count]), pointCount(count)
 {
     for(uint32_t i = 0; i < pointCount; i++)
         points[i] = pts[i];
@@ -47,6 +47,7 @@ void Polygon::setPoint(uint32_t index, const QPoint& pt)
 /* Render */
 void Polygon::draw(QPainter& qp) const
 {
+    Shape::draw(qp);
     qp.drawPolygon(points, static_cast<int>(pointCount));
 }
 
@@ -88,13 +89,7 @@ std::string Polygon::toString() const
 
     return "Shape Id: " + std::to_string(getId()) + "\r\n" +
            "ShapeType: Polygon\r\n" +
-           "ShapeDimensions: " + dimensions +
-           "PenColor: \r\n" +
-           "PenWidth: \r\n" +
-           "PenStyle: \r\n" +
-           "PenCapStyle: \r\n" +
-           "PenJoinStyle: \r\n" +
-           "BrushColor: \r\n" +
-           "BrushStyle: \r\n";
+           "ShapeDimensions: " + dimensions + "\r\n" +
+           stringifyProperties() + "\r\n";
 }
 }

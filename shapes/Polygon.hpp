@@ -1,19 +1,19 @@
 #pragma once
-#include "Shape.hpp"
+#include "FilledShape.hpp"
 
 namespace jbrush
 {
-class Polygon final : public Shape
+class Polygon final : public FilledShape
 {
 public:
     /* Constructors */
-
     /**
      * Creates a polygon from an array of points
      * @param points a pointer to multiple points, used as the vertices of the polygon
      * @param pointCount number of points in the `points` array
+     * @param props the shape properties, which adjust shape color and style
      */
-    Polygon(const QPoint* const points, uint32_t pointCount);
+    Polygon(const QPoint* const points, uint32_t pointCount, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /* Destructor */
     ~Polygon() override;

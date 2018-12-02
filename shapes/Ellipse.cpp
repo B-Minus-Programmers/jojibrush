@@ -3,12 +3,12 @@
 namespace jbrush
 {
 /* Constructors */
-Ellipse::Ellipse(const QPoint& center, int w, int h)
-       : Shape(center), width(w), height(h)
+Ellipse::Ellipse(const QPoint& center, int w, int h, FilledShapeProperties props)
+       : FilledShape(center, props), width(w), height(h)
 {}
 
-Ellipse::Ellipse(int x, int y, int w, int h)
-       : Shape(QPoint(x,y)), width(w), height(h)
+Ellipse::Ellipse(int x, int y, int w, int h, FilledShapeProperties props)
+       : FilledShape(QPoint(x,y), props), width(w), height(h)
 {}
 
 /* Getters */
@@ -36,6 +36,7 @@ void Ellipse::setHeight(int h)
 /* Render */
 void Ellipse::draw(QPainter& qp) const
 {
+    Shape::draw(qp);
     qp.drawEllipse(position, width, height);
 }
 
@@ -62,12 +63,6 @@ std::string Ellipse::toString() const
            std::to_string(position.y()) + ", " +
            std::to_string(width / 2)    + ", " +
            std::to_string(height / 2)   + "\r\n" +
-           "PenColor: \r\n" +
-           "PenWidth: \r\n" +
-           "PenStyle: \r\n" +
-           "PenCapStyle: \r\n" +
-           "PenJoinStyle: \r\n" +
-           "BrushColor: \r\n" +
-           "BrushStyle: \r\n";
+           stringifyProperties() + "\r\n";
 }
 }

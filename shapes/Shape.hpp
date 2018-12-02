@@ -95,6 +95,9 @@ protected:
     /* Shape Data */
     QPoint position;
 
+    virtual void applyProperties(QPainter&) const = 0;
+    virtual std::string stringifyProperties() const = 0;
+
 private:
     /* Static Variables */
     static uint32_t nextId;

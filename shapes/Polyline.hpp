@@ -1,9 +1,9 @@
 #pragma once
-#include "Shape.hpp"
+#include "GeometricShape.hpp"
 
 namespace jbrush
 {
-class Polyline final : public Shape
+class Polyline final : public GeometricShape
 {
 public:
     /* Constructors */
@@ -11,8 +11,9 @@ public:
      * Creates a polyline from a set of points
      * @param points a pointer to multiple points, used as the vertices of the polyline
      * @param pointCount number of points in the `points` array
+     * @param props the shape properties, which adjust shape color and style
      */
-    Polyline(const QPoint* const points, uint32_t pointCount);
+    Polyline(const QPoint* const points, uint32_t pointCount, GeometricShapeProperties props = DEFAULT_GEOMETRIC_PROPS);
 
     /* Destructor */
     ~Polyline() override;

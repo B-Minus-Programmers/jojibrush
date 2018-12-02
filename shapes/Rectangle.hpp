@@ -1,27 +1,28 @@
 #pragma once
-#include "Shape.hpp"
+#include "FilledShape.hpp"
 
 namespace jbrush
 {
-class Rect final : public Shape
+class Rectangle final : public FilledShape
 {
 public:
     /* Constructors */
-    
     /**
      * Creates a rectangle from two points
      * @param topL the top-left point of the rectangle
      * @param bottomR the bottom-right point of the rectangle
+     * @param props the shape properties, which adjust shape color and style
      */
-    Rect(const QPoint& topL, const QPoint& bottomR);
+    Rectangle(const QPoint& topL, const QPoint& bottomR, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /**
      * Creates a rectangle at a given position, with a given width and height
      * @param topL the top-left point of the rectangle
      * @param width the width of the rectangle
      * @param height the height of the rectangle
+     * @param props the shape properties, which adjust shape color and style
      */
-    Rect(const QPoint& topL, int width, int height);
+    Rectangle(const QPoint& topL, int width, int height, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /**
      * Creates a rectangle at a given (x,y) coordinate pair, with a given width and height
@@ -29,8 +30,9 @@ public:
      * @param y the y-coordinate of the top left of the rectangle
      * @param width the width of the rectangle
      * @param height the height of the rectangle
+     * @param props the shape properties, which adjust shape color and style
      */
-    Rect(int x, int y, int width, int height);
+    Rectangle(int x, int y, int width, int height, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /* Getters */
 

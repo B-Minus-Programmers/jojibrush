@@ -1,20 +1,20 @@
 #pragma once
-#include "Shape.hpp"
+#include "FilledShape.hpp"
 
 namespace jbrush
 {
-class Ellipse final : public Shape
+class Ellipse final : public FilledShape
 {
 public:
     /* Constructors */
-
     /**
      * Creates an ellipse centered around a point with a given width and height
      * @param center the center of the ellipse
      * @param width the width of the ellipse
      * @param height the height of the ellipse
+     * @param props the shape properties, which adjust shape color and style
      */
-    Ellipse(const QPoint& center, int width, int height);
+    Ellipse(const QPoint& center, int width, int height, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /**
      * Creates an ellipse centered around an (x,y) coordinate pair with a given width and height
@@ -22,8 +22,9 @@ public:
      * @param y the y-coordinate of the center of the ellipse
      * @param width the width of the ellipse
      * @param height the height of the ellipse
+     * @param props the shape properties, which adjust shape color and style
      */
-    Ellipse(int x, int y, int width, int height);
+    Ellipse(int x, int y, int width, int height, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /* Getters */
 

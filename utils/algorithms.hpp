@@ -17,6 +17,6 @@ int compareId(const Shape*, const Shape*);
 int compareArea(const Shape*, const Shape*);
 int comparePerimeter(const Shape*, const Shape*);
 void sort(Vector<Shape*>&, Comparator = compareId);
-void getTo(QTextStream&, const QChar&);
 
+void getTo(QTextStream&, const QChar&);
 }

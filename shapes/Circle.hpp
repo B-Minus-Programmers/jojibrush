@@ -1,27 +1,28 @@
 #pragma once
-#include "Shape.hpp"
+#include "FilledShape.hpp"
 
 namespace jbrush
 {
-class Circle final : public Shape
+class Circle final : public FilledShape
 {
 public:
     /* Constructors */
-
     /**
      * Creates a circle centered at a point with a given radius
      * @param center the center of the circle
      * @param radius the radius of the circle
+     * @param props the shape properties, which adjust shape color and style
      */
-    Circle(const QPoint& center, int radius);
+    Circle(const QPoint& center, int radius, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /**
      * Creates a circle centered at an (x,y) coordinate pair with a given radius
      * @param x the x-coordinate to center the circle around
      * @param y the y-coordinate to center the circle around
      * @param radius the radius of the circle
+     * @param props the shape properties, which adjust shape color and style
      */
-    Circle(int x, int y, int radius);
+    Circle(int x, int y, int radius, FilledShapeProperties props = DEFAULT_FILLED_PROPS);
 
     /* Getters */
 
