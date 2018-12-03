@@ -57,3 +57,78 @@ void MainWindow::on_actionLoad_triggered()
         }
     }
 }
+
+void MainWindow::on_actionShape_Id_s_triggered()
+{
+    QString filename = QFileDialog::getSaveFileName(this,"Save File / ID report",nullptr,"Text File(*.txt)");
+
+    if(!filename.isEmpty())
+    {
+        QFile file(filename);
+        QTextStream qOut(&file);
+        file.open(QIODevice::ReadWrite);
+        Vector<Shape*> shapes = canvas->getShapes();
+        jbrush::sort(shapes,jbrush::compareId);
+        Vector<Shape*>::iterator itor = shapes.begin();
+
+        while(itor != shapes.end())
+        {
+            qOut << (*itor) ->toQString() << "\r\n\r\n";
+            ++itor;
+        }
+        file.close();
+    }
+}
+
+void MainWindow::on_actionShape_Area_s_triggered()
+{
+    QString filename = QFileDialog::getSaveFileName(this,"Save File / Area Report",nullptr,"Text File(*.txt)");
+    if(!filename.isEmpty())
+    {
+        QFile file(filename);
+        QTextStream qOut(&file);
+        file.open(QIODevice::ReadWrite);
+        Vector<Shape*> shapes = canvas->getShapes();
+        jbrush::sort(shapes,jbrush::compareArea);
+        Vector<Shape*>::iterator itor = shapes.begin();
+
+        while(itor != shapes.end())
+        {
+            if((*itor)->area() != -1)
+            {
+                qOut << "Shape Area: " <<(*itor) ->area() << "\r\n";
+                qOut << (*itor)->toQString();
+                qOut << "\r\n";
+            }
+            ++itor;
+        }
+        file.close();
+    }
+}
+
+void MainWindow::on_actionShape_Perimeters_triggered()
+{
+    QString filename = QFileDialog::getSaveFileName(this,"Save File / Perimeter Report",nullptr,"Text File(*.txt)");
+    if(!filename.isEmpty())
+    {
+        QFile file(filename);
+        QTextStream qOut(&file);
+        file.open(QIODevice::ReadWrite);
+        Vector<Shape*> shapes = canvas->getShapes();
+        jbrush::sort(shapes,jbrush::comparePerimeter);
+        Vector<Shape*>::iterator itor = shapes.begin();
+
+        while(itor != shapes.end())
+        {
+            if((*itor)->perimeter() != -1)
+            {
+                qOut <<"Shape Perimeter: " <<(*itor) ->perimeter() << "\r\n";
+                qOut << (*itor)->toQString();
+                qOut << "\r\n";
+            }
+            ++itor;
+        }
+        file.close();
+    }
+}
+

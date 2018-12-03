@@ -43,3 +43,4 @@ public:
     BadFileFormat(const QFile& badFile, QString expected, QString got);
 };
 }
+

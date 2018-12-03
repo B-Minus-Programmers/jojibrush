@@ -24,19 +24,35 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuSave_As">
+     <property name="title">
+      <string>Save As ...</string>
+     </property>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
-    <addaction name="actionSave_As"/>
+    <addaction name="menuSave_As"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuReports_2">
+    <property name="title">
+     <string>Reports</string>
+    </property>
+    <addaction name="actionShape_Id_s"/>
+    <addaction name="actionShape_Area_s"/>
+    <addaction name="actionShape_Perimeters"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuReports_2"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSave">
@@ -66,6 +82,21 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionShape_Id_s">
+   <property name="text">
+    <string>Shape IDs...</string>
+   </property>
+  </action>
+  <action name="actionShape_Area_s">
+   <property name="text">
+    <string>Shape Areas...</string>
+   </property>
+  </action>
+  <action name="actionShape_Perimeters">
+   <property name="text">
+    <string>Shape Perimeters...</string>
    </property>
   </action>
  </widget>

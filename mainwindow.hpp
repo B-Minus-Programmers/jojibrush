@@ -20,6 +20,10 @@ public:
 private slots:
     void on_actionLoad_triggered();
 
+    void on_actionShape_Id_s_triggered();
+    void on_actionShape_Area_s_triggered();
+    void on_actionShape_Perimeters_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString currentFile;    // Directory of the file containing shapes currently loaded into the program

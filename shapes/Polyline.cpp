@@ -74,7 +74,7 @@ std::string Polyline::toString() const
 
     return "Shape Id: " + std::to_string(getId()) + "\r\n" +
            "ShapeType: Polyline\r\n" +
-           "ShapeDimensions: " + dimensions + "\r\n" +
+           "ShapeDimensions: " + dimensions +
            stringifyProperties() + "\r\n";
 }
 }

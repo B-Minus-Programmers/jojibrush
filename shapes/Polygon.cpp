@@ -89,7 +89,7 @@ std::string Polygon::toString() const
 
     return "Shape Id: " + std::to_string(getId()) + "\r\n" +
            "ShapeType: Polygon\r\n" +
-           "ShapeDimensions: " + dimensions + "\r\n" +
+           "ShapeDimensions: " + dimensions +
            stringifyProperties() + "\r\n";
 }
 }
