@@ -5,6 +5,7 @@
 #include "utils/vector.hpp"
 #include "utils/FileHandler.hpp"
 #include "shapes/Shape.hpp"
+#include "AccountType.hpp"
 
 using jbrush::Vector;
 using jbrush::Shape;
@@ -16,6 +17,7 @@ class Canvas : public QWidget
     Q_OBJECT
 private:
     Vector<Shape*> shapes;
+    jbrush::AccountType accType;
 public:
     Canvas(QWidget *parent = nullptr);
     ~Canvas();
@@ -31,6 +33,9 @@ public:
     void removeShape(uint32_t);
 
     void clearShapes();
+
+    jbrush::AccountType getAccountType() const;
+    void setAccountType(jbrush::AccountType);
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };

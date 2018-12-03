@@ -1,6 +1,7 @@
 #pragma once
 #include <QMainWindow>
 #include "Canvas.hpp"
+#include "AccountType.hpp"
 
 namespace Ui {
     class MainWindow;
@@ -13,6 +14,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void setAccountType(jbrush::AccountType);
 
 private slots:
     void on_actionLoad_triggered();

@@ -76,6 +76,16 @@ void Canvas::clearShapes()
     shapes.clear();
 }
 
+jbrush::AccountType Canvas::getAccountType() const
+{
+    return accType;
+}
+
+void Canvas::setAccountType(jbrush::AccountType type)
+{
+    accType = type;
+}
+
 void Canvas::paintEvent(QPaintEvent*)
 {
     QPainter painter;

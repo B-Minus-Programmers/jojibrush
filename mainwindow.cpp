@@ -1,9 +1,8 @@
+#include <QFileDialog>
+#include <QMessageBox>
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
-#include "Canvas.hpp"
 #include "shapes/Shapes.hpp"
-
-using jbrush::Canvas;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow), canvas(new jbrush::Canvas)
@@ -35,6 +34,11 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete canvas;
+}
+
+void MainWindow::setAccountType(jbrush::AccountType type)
+{
+    canvas->setAccountType(type);
 }
 
 void MainWindow::on_actionLoad_triggered()

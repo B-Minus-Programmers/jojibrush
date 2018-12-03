@@ -61,12 +61,20 @@ HEADERS += \
         shapes/Polygon.hpp \
         shapes/Line.hpp \
         shapes/Polyline.hpp \
-        shapes/Text.hpp
+        shapes/Shapes.hpp \
+        shapes/Polygon.hpp \
+        shapes/Shape.hpp \
+        shapes/Text.hpp \
+        utils/exceptions.hpp \
+        loginwindow.hpp \
+        utils/FileHandler.hpp \
+        utils/algorithms.hpp \
+        AccountType.hpp
 
 FORMS += \
         mainwindow.ui \
         loginwindow.ui
 
 RESOURCES += \
-    login.qrc \
-    resources.qrc
+        login.qrc \
+        global.qrc

@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Jojibrush</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="global.qrc">
+    <normaloff>:/resources/global/icons/logo.png</normaloff>:/resources/global/icons/logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -66,6 +70,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="global.qrc"/>
+ </resources>
  <connections/>
 </ui>

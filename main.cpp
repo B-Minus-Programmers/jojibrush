@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QSplashScreen *splash = new QSplashScreen(QPixmap(":/resources/icon.png"));
+    QSplashScreen *splash = new QSplashScreen(QPixmap(":/resources/global/icons/giantlogo.png"));
     splash->show();
     QTimer::singleShot(1500,splash,SLOT(close()));
 
