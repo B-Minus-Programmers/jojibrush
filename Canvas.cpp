@@ -93,6 +93,10 @@ void Canvas::paintEvent(QPaintEvent*)
     for (auto shape : shapes)
     {
         shape->draw(painter);
+
+        // reset the pen, setting text color to black
+        painter.setPen(QPen());
+        painter.drawText(shape->getPosition(), "#" + QString::number(shape->getId()));
     }
     painter.end();
 }
