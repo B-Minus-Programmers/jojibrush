@@ -23,6 +23,7 @@ private slots:
     void on_actionShape_Id_s_triggered();
     void on_actionShape_Area_s_triggered();
     void on_actionShape_Perimeters_triggered();
+    void on_actionExport_triggered();
 
 private:
     Ui::MainWindow *ui;

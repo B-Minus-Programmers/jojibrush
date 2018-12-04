@@ -132,3 +132,10 @@ void MainWindow::on_actionShape_Perimeters_triggered()
     }
 }
 
+void MainWindow::on_actionExport_triggered()
+{
+    QString imgDir;
+    QPixmap pixmap = canvas->grab(canvas->rect());
+    imgDir = QFileDialog::getSaveFileName(this,"Save Image",nullptr,"Bitmap files (*.bmp);;JPG files (*.jpg);;PNG files (*.png)");
+    pixmap.save(imgDir);
+}

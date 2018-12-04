@@ -1,7 +1,6 @@
 #pragma once
 #include <QWidget>
 #include <QPainter>
-
 #include "utils/vector.hpp"
 #include "utils/FileHandler.hpp"
 #include "shapes/Shape.hpp"
