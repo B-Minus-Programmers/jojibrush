@@ -9,6 +9,7 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent)
 {
     setBackgroundRole(QPalette::Base);
     setAutoFillBackground(true);
+    drawShapeIds = true;
 }
 
 Canvas::~Canvas()
@@ -96,7 +97,15 @@ void Canvas::paintEvent(QPaintEvent*)
 
         // reset the pen, setting text color to black
         painter.setPen(QPen());
-        painter.drawText(shape->getPosition(), "#" + QString::number(shape->getId()));
+        if (drawShapeIds)
+        {
+            painter.drawText(shape->getPosition(), "#" + QString::number(shape->getId()));
+        }
     }
     painter.end();
+}
+
+void Canvas::setDrawShapeIds(bool drawShapeIds) {
+    this->drawShapeIds = drawShapeIds;
+    this->repaint();
 }

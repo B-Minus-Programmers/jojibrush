@@ -17,6 +17,8 @@ class Canvas : public QWidget
 private:
     Vector<Shape*> shapes;
     jbrush::AccountType accType;
+
+    bool drawShapeIds;
 public:
     Canvas(QWidget *parent = nullptr);
     ~Canvas();
@@ -35,6 +37,8 @@ public:
 
     jbrush::AccountType getAccountType() const;
     void setAccountType(jbrush::AccountType);
+
+    void setDrawShapeIds(bool);
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };

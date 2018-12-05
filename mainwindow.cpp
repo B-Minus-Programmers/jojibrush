@@ -139,4 +139,7 @@ void MainWindow::on_actionExport_triggered()
     pixmap.save(imgDir);
 }
 
-
+void MainWindow::on_actionShow_Shape_IDs_toggled(bool checked)
+{
+    canvas->setDrawShapeIds(checked);
+}
