@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -37,7 +37,17 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionExport"/>
    </widget>
+   <widget class="QMenu" name="menuReports">
+    <property name="title">
+     <string>Reports</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionShape_Id_s"/>
+    <addaction name="actionShape_Area_s"/>
+    <addaction name="actionShape_Perimeters"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuReports"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSave">
@@ -74,9 +84,19 @@
     <string>Export</string>
    </property>
   </action>
-  <action name="actionExport">
+  <action name="actionShape_Id_s">
    <property name="text">
-    <string>Export</string>
+    <string>Shape Ids...</string>
+   </property>
+  </action>
+  <action name="actionShape_Area_s">
+   <property name="text">
+    <string>Shape Areas...</string>
+   </property>
+  </action>
+  <action name="actionShape_Perimeters">
+   <property name="text">
+    <string>Shape Perimeters...</string>
    </property>
   </action>
  </widget>

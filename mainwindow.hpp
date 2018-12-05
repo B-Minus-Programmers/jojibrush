@@ -25,6 +25,7 @@ private slots:
     void on_actionShape_Perimeters_triggered();
     void on_actionExport_triggered();
 
+
 private:
     Ui::MainWindow *ui;
     QString currentFile;    // Directory of the file containing shapes currently loaded into the program

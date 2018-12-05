@@ -57,7 +57,6 @@ void MainWindow::on_actionLoad_triggered()
         }
     }
 }
-
 void MainWindow::on_actionShape_Id_s_triggered()
 {
     QString filename = QFileDialog::getSaveFileName(this,"Save File / ID report",nullptr,"Text File(*.txt)");
@@ -139,3 +138,5 @@ void MainWindow::on_actionExport_triggered()
     imgDir = QFileDialog::getSaveFileName(this,"Save Image",nullptr,"Bitmap files (*.bmp);;JPG files (*.jpg);;PNG files (*.png)");
     pixmap.save(imgDir);
 }
+
+
