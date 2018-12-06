@@ -41,7 +41,12 @@ SOURCES += \
         shapes/Line.cpp \
         shapes/Polyline.cpp \
         shapes/Text.cpp \
-        AboutUs.cpp
+        AboutUs.cpp \
+        menus/FilledPropertiesMenu.cpp \
+        menus/GeometricPropertiesMenu.cpp \
+        menus/shapeselectmenu.cpp \
+        menus/TextPropertiesMenu.cpp \
+        menus/AllPropertiesMenu.cpp
 
 HEADERS += \
         mainwindow.hpp \
@@ -71,12 +76,22 @@ HEADERS += \
         utils/FileHandler.hpp \
         utils/algorithms.hpp \
         AccountType.hpp \
-        AboutUs.hpp
+        AboutUs.hpp \
+        menus/FilledPropertiesMenu.hpp \
+        menus/GeometricPropertiesMenu.hpp \
+        menus/shapeselectmenu.hpp \
+        menus/TextPropertiesMenu.hpp \
+        menus/AllPropertiesMenu.hpp
 
 FORMS += \
         mainwindow.ui \
         loginwindow.ui \
-        aboutus.ui
+        aboutus.ui \
+        filledpropsmenu.ui \
+        geopropsmenu.ui \
+        shapeselectmenu.ui \
+        textpropsmenu.ui \
+        allpropsmenu.ui
 
 RESOURCES += \
         login.qrc \

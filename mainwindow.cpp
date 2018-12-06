@@ -1,33 +1,40 @@
-#include <QFileDialog>
-#include <QMessageBox>
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
+#include "Canvas.hpp"
 #include "shapes/Shapes.hpp"
+#include "shapes/Rectangle.hpp"
+
+using jbrush::Canvas;
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow), canvas(new jbrush::Canvas)
+    QMainWindow(parent), ui(new Ui::MainWindow),
+    canvas(new jbrush::Canvas), shapeSelectMenu(new ShapeSelectMenu),
+    shapePropertiesMenu(new AllPropertiesMenu), textPropertiesMenu(new TextPropertiesMenu)
 {
-    setWindowIcon(QIcon(":/resources/icon.png"));
+    // Setup the main menu's ui
     ui->setupUi(this);
 
-    MainWindow::setCentralWidget(canvas);
+    // Put the shape menus in the placeholder on the form
+    canvas->setParent(ui->canvasWidget);
+    shapeSelectMenu->setParent(ui->shapeSelectMenuWidget);
+    shapePropertiesMenu->setParent(ui->shapePropertiesMenuWidget);
+    textPropertiesMenu->setParent(ui->shapePropertiesMenuWidget);
 
-    QPoint p1(100,100);
-    QPoint p2(200,200);
-    jbrush::FilledShapeProperties props;
-    props.border.penCapStyle = Qt::PenCapStyle::FlatCap;
-    props.border.penColor = Qt::GlobalColor::blue;
-    props.border.penJoinStyle = Qt::PenJoinStyle::BevelJoin;
-    props.border.penStyle = Qt::PenStyle::DashLine;
-    props.border.penWidth = 10;
-    props.brushColor = Qt::GlobalColor::green;
-    props.brushStyle = Qt::BrushStyle::HorPattern;
-    jbrush::Shape* shape = new jbrush::Rectangle(p1, p2, props);
+    // Calculate the dimensions of the canvas to fill in the remainder of the space not taken up by the menu widgets
+    canvas->setFixedHeight(height());
+    canvas->setFixedWidth(width() - ui->shapeSelectMenuWidget->width() - ui->shapePropertiesMenuWidget->width());
 
-    jbrush::Shape* defaultPropsShape = new jbrush::Ellipse(500, 200, 300, 100);
+    // Set selected properties with the initial values on the menus
+    canvas->setSelectedFilledProperties(shapePropertiesMenu->getGeometricPropertiesMenu()->getProperties(),
+                                        shapePropertiesMenu->getFilledPropertiesMenu()->getBrushColor(),
+                                        shapePropertiesMenu->getFilledPropertiesMenu()->getBrushStyle());
+    canvas->setSelectedTextProperties(textPropertiesMenu->getProperties());
 
-    canvas->addShape(shape);
-    canvas->addShape(defaultPropsShape);
+    // Update the properties menus
+    updatePropertiesMenus();
+
+    // Connect signals and slots across widgets that are unaware of each other
+    connectSignalsAndSlots();
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +64,37 @@ void MainWindow::on_actionLoad_triggered()
         }
     }
 }
+
+void MainWindow::connectSignalsAndSlots()
+{
+    // Connect signals and slots such that the properties menus update whenever any shape type is selected
+    connect(shapeSelectMenu, &ShapeSelectMenu::onSelection, this, &MainWindow::updatePropertiesMenus);
+    connect(shapePropertiesMenu->getGeometricPropertiesMenu(), &GeometricPropertiesMenu::onItemChanged, canvas, &Canvas::updateGeometricProperties);
+    connect(shapePropertiesMenu->getFilledPropertiesMenu(), &FilledPropertiesMenu::onItemChanged, canvas, &Canvas::updateFilledProperties);
+    connect(textPropertiesMenu, &TextPropertiesMenu::onItemChanged, canvas, &Canvas::updateTextProperties);
+}
+
+void MainWindow::updatePropertiesMenus()
+{
+    // If text is selected, show text properties and hide shape properties
+    if(shapeSelectMenu->getShapeTypeSelected() == jbrush::SelectableShapeType::TEXT)
+    {
+        textPropertiesMenu->show();
+        shapePropertiesMenu->hide();
+    }
+    // Otherwise, do exactly the opposite
+    else
+    {
+        textPropertiesMenu->hide();
+        shapePropertiesMenu->show();
+
+        // Display fill properties when the shape type selected isn't a line
+        shapePropertiesMenu->displayFilledPropertiesMenu
+                (shapeSelectMenu->getShapeTypeSelected() != jbrush::SelectableShapeType::LINE &&
+                shapeSelectMenu->getShapeTypeSelected() != jbrush::SelectableShapeType::POLYLINE);
+    }
+}
+
 void MainWindow::on_actionShape_Id_s_triggered()
 {
     QString filename = QFileDialog::getSaveFileName(this,"Save File / ID report",nullptr,"Text File(*.txt)");

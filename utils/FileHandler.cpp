@@ -1,5 +1,4 @@
 #include "FileHandler.hpp"
-#include <QDebug>
 
 namespace jbrush {
 

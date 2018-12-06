@@ -1,5 +1,4 @@
 #include "algorithms.hpp"
-#include <QDebug>
 
 using jbrush::Comparator;
 

@@ -41,6 +41,11 @@ const QChar TITLE_INTERRUPTOR = ':';
 const QChar DIMENSION_INTERRUPTOR = ',';
 
 // Maps enable the parser to quickly obtain the value associated with the text used to initialize the shape's data
+const QMap<QString, Qt::GlobalColor> COLOR_MAP = {
+  {"white", Qt::GlobalColor::white}, {"black", Qt::GlobalColor::black}, {"red", Qt::GlobalColor::red},
+  {"green", Qt::GlobalColor::green}, {"blue", Qt::GlobalColor::blue}, {"cyan", Qt::GlobalColor::cyan},
+  {"magenta", Qt::GlobalColor::magenta}, {"yellow", Qt::GlobalColor::yellow}, {"gray", Qt::GlobalColor::gray}
+};
 const QMap<QString, Qt::PenStyle> PEN_STYLE_MAP = {
     {"NoPen", Qt::NoPen}, {"SolidLine", Qt::SolidLine}, {"DashLine", Qt::DashLine},
     {"DotLine", Qt::DotLine}, {"DashDotLine", Qt::DashDotLine}, {"DashDotDotLine", Qt::DashDotDotLine},

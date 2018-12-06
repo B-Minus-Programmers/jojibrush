@@ -1,9 +1,24 @@
 #include "Canvas.hpp"
 #include "utils/exceptions.hpp"
 #include <QPainter>
-#include <QDebug>
 
 using jbrush::Canvas;
+
+void Canvas::updateGeometricProperties(jbrush::GeometricShapeProperties props)
+{
+    selectedFilledProperties.border = props;
+}
+
+void Canvas::updateFilledProperties(Qt::GlobalColor color, Qt::BrushStyle style)
+{
+    selectedFilledProperties.brushColor = color;
+    selectedFilledProperties.brushStyle = style;
+}
+
+void Canvas::updateTextProperties(jbrush::TextShapeProperties props)
+{
+    selectedTextProperties = props;
+}
 
 Canvas::Canvas(QWidget *parent) : QWidget(parent)
 {
@@ -108,4 +123,16 @@ void Canvas::paintEvent(QPaintEvent*)
 void Canvas::setDrawShapeIds(bool drawShapeIds) {
     this->drawShapeIds = drawShapeIds;
     this->repaint();
+}
+
+void Canvas::setSelectedFilledProperties(jbrush::GeometricShapeProperties border, Qt::GlobalColor color, Qt::BrushStyle style)
+{
+    selectedFilledProperties.border = border;
+    selectedFilledProperties.brushColor = color;
+    selectedFilledProperties.brushStyle = style;
+}
+
+void Canvas::setSelectedTextProperties(jbrush::TextShapeProperties props)
+{
+    selectedTextProperties = props;
 }
