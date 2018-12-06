@@ -293,12 +293,14 @@ Vector<T>& Vector<T>::operator=(const Vector& vec)
 {
     //Delete old array
     delete[] array;
-    
-    //Resize array to fit new elements
-    resize(vec.size);
+
+    //Assign members
+    array = new T[vec.capacity];
+    capacity = vec.capacity;
+    size = vec.size;
     
     //Deep copy elements from other vector
-    for (uint32_t i = 0; i < size; i++)
+    for (uint32_t i = 0; i < vec.size; i++)
     {
         array[i] = vec.array[i];
     }
