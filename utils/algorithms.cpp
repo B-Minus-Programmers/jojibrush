@@ -22,6 +22,8 @@ int comparePerimeter(const Shape* a, const Shape* b)
 
 void sort(Vector<Shape*>& vector, Comparator cmp)
 {
+    if (vector.getSize() == 0) return;
+
     uint32_t min;
     for (uint32_t i = 0; i < vector.getSize() - 1; i++)
     {
