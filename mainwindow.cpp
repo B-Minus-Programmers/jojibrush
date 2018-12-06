@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     canvas->setFixedWidth(width() - ui->shapeSelectMenuWidget->width() - ui->shapePropertiesMenuWidget->width());
 
     // Set selected properties with the initial values on the menus
+    canvas->setSelectedShapeType(shapeSelectMenu->getShapeTypeSelected());
     canvas->setSelectedFilledProperties(shapePropertiesMenu->getGeometricPropertiesMenu()->getProperties(),
                                         shapePropertiesMenu->getFilledPropertiesMenu()->getBrushColor(),
                                         shapePropertiesMenu->getFilledPropertiesMenu()->getBrushStyle());
@@ -69,9 +70,15 @@ void MainWindow::connectSignalsAndSlots()
 {
     // Connect signals and slots such that the properties menus update whenever any shape type is selected
     connect(shapeSelectMenu, &ShapeSelectMenu::onSelection, this, &MainWindow::updatePropertiesMenus);
-    connect(shapePropertiesMenu->getGeometricPropertiesMenu(), &GeometricPropertiesMenu::onItemChanged, canvas, &Canvas::updateGeometricProperties);
-    connect(shapePropertiesMenu->getFilledPropertiesMenu(), &FilledPropertiesMenu::onItemChanged, canvas, &Canvas::updateFilledProperties);
-    connect(textPropertiesMenu, &TextPropertiesMenu::onItemChanged, canvas, &Canvas::updateTextProperties);
+
+    // Update selected properties on the canvas whenever a selection is made in the menus
+    connect(shapeSelectMenu, &ShapeSelectMenu::onSelection, canvas, &Canvas::updateShapeType);
+    connect(shapePropertiesMenu->getGeometricPropertiesMenu(), &GeometricPropertiesMenu::onItemChanged,
+            canvas, &Canvas::updateGeometricProperties);
+    connect(shapePropertiesMenu->getFilledPropertiesMenu(), &FilledPropertiesMenu::onItemChanged,
+            canvas, &Canvas::updateFilledProperties);
+    connect(textPropertiesMenu, &TextPropertiesMenu::onItemChanged,
+            canvas, &Canvas::updateTextProperties);
 }
 
 void MainWindow::updatePropertiesMenus()

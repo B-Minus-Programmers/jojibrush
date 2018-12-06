@@ -11,6 +11,7 @@ ShapeSelectMenu::ShapeSelectMenu(QWidget *parent) :
     // Make all select buttons checkable
     ui->selectLine->setCheckable(true);
     ui->selectPolyline->setCheckable(true);
+    ui->selectPolygon->setCheckable(true);
     ui->selectRectangle->setCheckable(true);
     ui->selectEllipse->setCheckable(true);
     ui->selectCircle->setCheckable(true);
@@ -50,13 +51,14 @@ void ShapeSelectMenu::on_selectLine_clicked()
     // Check line select and de-select everything else
     ui->selectLine->setChecked(true);
     ui->selectPolyline->setChecked(false);
+    ui->selectPolygon->setChecked(false);
     ui->selectRectangle->setChecked(false);
     ui->selectEllipse->setChecked(false);
     ui->selectCircle->setChecked(false);
     ui->selectText->setChecked(false);
 
     // Emit the "onSelection" signal
-    onSelection();
+    onSelection(shapeTypeSelected);
 }
 
 void ShapeSelectMenu::on_selectPolyline_clicked()
@@ -66,13 +68,31 @@ void ShapeSelectMenu::on_selectPolyline_clicked()
     // Check line select and de-select everything else
     ui->selectLine->setChecked(false);
     ui->selectPolyline->setChecked(true);
+    ui->selectPolygon->setChecked(false);
     ui->selectRectangle->setChecked(false);
     ui->selectEllipse->setChecked(false);
     ui->selectCircle->setChecked(false);
     ui->selectText->setChecked(false);
 
     // Emit the "onSelection" signal
-    onSelection();
+    onSelection(shapeTypeSelected);
+}
+
+void ShapeSelectMenu::on_selectPolygon_clicked()
+{
+    shapeTypeSelected = jbrush::SelectableShapeType::POLYGON;
+
+    // Check line select and de-select everything else
+    ui->selectLine->setChecked(false);
+    ui->selectPolyline->setChecked(false);
+    ui->selectPolygon->setChecked(true);
+    ui->selectRectangle->setChecked(false);
+    ui->selectEllipse->setChecked(false);
+    ui->selectCircle->setChecked(false);
+    ui->selectText->setChecked(false);
+
+    // Emit the "onSelection" signal
+    onSelection(shapeTypeSelected);
 }
 
 void ShapeSelectMenu::on_selectRectangle_clicked()
@@ -82,13 +102,14 @@ void ShapeSelectMenu::on_selectRectangle_clicked()
     // Check line select and de-select everything else
     ui->selectLine->setChecked(false);
     ui->selectPolyline->setChecked(false);
+    ui->selectPolygon->setChecked(false);
     ui->selectRectangle->setChecked(true);
     ui->selectEllipse->setChecked(false);
     ui->selectCircle->setChecked(false);
     ui->selectText->setChecked(false);
 
     // Emit the "onSelection" signal
-    onSelection();
+    onSelection(shapeTypeSelected);
 }
 
 void ShapeSelectMenu::on_selectEllipse_clicked()
@@ -98,13 +119,14 @@ void ShapeSelectMenu::on_selectEllipse_clicked()
     // Check line select and de-select everything else
     ui->selectLine->setChecked(false);
     ui->selectPolyline->setChecked(false);
+    ui->selectPolygon->setChecked(false);
     ui->selectRectangle->setChecked(false);
     ui->selectEllipse->setChecked(true);
     ui->selectCircle->setChecked(false);
     ui->selectText->setChecked(false);
 
     // Emit the "onSelection" signal
-    onSelection();
+    onSelection(shapeTypeSelected);
 }
 
 void ShapeSelectMenu::on_selectCircle_clicked()
@@ -114,13 +136,14 @@ void ShapeSelectMenu::on_selectCircle_clicked()
     // Check line select and de-select everything else
     ui->selectLine->setChecked(false);
     ui->selectPolyline->setChecked(false);
+    ui->selectPolygon->setChecked(false);
     ui->selectRectangle->setChecked(false);
     ui->selectEllipse->setChecked(false);
     ui->selectCircle->setChecked(true);
     ui->selectText->setChecked(false);
 
     // Emit the "onSelection" signal
-    onSelection();
+    onSelection(shapeTypeSelected);
 }
 
 void ShapeSelectMenu::on_selectText_clicked()
@@ -130,11 +153,12 @@ void ShapeSelectMenu::on_selectText_clicked()
     // Check line select and de-select everything else
     ui->selectLine->setChecked(false);
     ui->selectPolyline->setChecked(false);
+    ui->selectPolygon->setChecked(false);
     ui->selectRectangle->setChecked(false);
     ui->selectEllipse->setChecked(false);
     ui->selectCircle->setChecked(false);
     ui->selectText->setChecked(true);
 
     // Emit the "onSelection" signal
-    onSelection();
+    onSelection(shapeTypeSelected);
 }

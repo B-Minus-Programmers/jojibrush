@@ -81,7 +81,7 @@ HEADERS += \
         menus/GeometricPropertiesMenu.hpp \
         menus/shapeselectmenu.hpp \
         menus/TextPropertiesMenu.hpp \
-        menus/AllPropertiesMenu.hpp
+    menus/AllPropertiesMenu.hpp
 
 FORMS += \
         mainwindow.ui \

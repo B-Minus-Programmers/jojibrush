@@ -14,6 +14,7 @@ enum class SelectableShapeType
 {
     LINE,
     POLYLINE,
+    POLYGON,
     RECTANGLE,
     ELLIPSE,
     CIRCLE,
@@ -50,7 +51,7 @@ public:
     QPushButton *getSelectTextButton() const;
 
 signals:
-    void onSelection(); // Signal emmits when any selection is made
+    void onSelection(jbrush::SelectableShapeType); // Signal emmits when any selection is made
 
 private slots:
     void on_selectLine_clicked();
@@ -64,6 +65,8 @@ private slots:
     void on_selectPolyline_clicked();
 
     void on_selectCircle_clicked();
+
+    void on_selectPolygon_clicked();
 
 private:
     jbrush::SelectableShapeType shapeTypeSelected;  // Shape type currently selected to be drawn to the screen

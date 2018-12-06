@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>132</width>
-    <height>489</height>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>170</y>
+     <y>250</y>
      <width>111</width>
      <height>71</height>
     </rect>
@@ -53,7 +53,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>250</y>
+     <y>330</y>
      <width>111</width>
      <height>71</height>
     </rect>
@@ -71,7 +71,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>410</y>
+     <y>490</y>
      <width>111</width>
      <height>71</height>
     </rect>
@@ -107,7 +107,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>330</y>
+     <y>410</y>
      <width>111</width>
      <height>71</height>
     </rect>
@@ -119,6 +119,24 @@
    </property>
    <property name="text">
     <string>Circle</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="selectPolygon">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>111</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Polygon</string>
    </property>
   </widget>
  </widget>

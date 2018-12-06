@@ -4,22 +4,6 @@
 
 using jbrush::Canvas;
 
-void Canvas::updateGeometricProperties(jbrush::GeometricShapeProperties props)
-{
-    selectedFilledProperties.border = props;
-}
-
-void Canvas::updateFilledProperties(Qt::GlobalColor color, Qt::BrushStyle style)
-{
-    selectedFilledProperties.brushColor = color;
-    selectedFilledProperties.brushStyle = style;
-}
-
-void Canvas::updateTextProperties(jbrush::TextShapeProperties props)
-{
-    selectedTextProperties = props;
-}
-
 Canvas::Canvas(QWidget *parent) : QWidget(parent)
 {
     setBackgroundRole(QPalette::Base);
@@ -40,7 +24,7 @@ Vector<Shape*> Canvas::getShapes()
 
 bool Canvas::loadFromFile(QString &fileDir)
 {
-    FileHandler fileUtil;
+    jbrush::FileHandler fileUtil;
     Vector<Shape*> shapesLoaded;    // Shapes loaded by the file utility
 
     // Load the shapes
@@ -125,6 +109,11 @@ void Canvas::setDrawShapeIds(bool drawShapeIds) {
     this->repaint();
 }
 
+void Canvas::setSelectedShapeType(jbrush::SelectableShapeType type)
+{
+    shapeTypeSelected = type;
+}
+
 void Canvas::setSelectedFilledProperties(jbrush::GeometricShapeProperties border, Qt::GlobalColor color, Qt::BrushStyle style)
 {
     selectedFilledProperties.border = border;
@@ -133,6 +122,25 @@ void Canvas::setSelectedFilledProperties(jbrush::GeometricShapeProperties border
 }
 
 void Canvas::setSelectedTextProperties(jbrush::TextShapeProperties props)
+{
+    selectedTextProperties = props;
+}
+
+// SLOT DEFINITIONS
+void Canvas::updateShapeType(SelectableShapeType type)
+{
+    shapeTypeSelected = type;
+}
+void Canvas::updateGeometricProperties(jbrush::GeometricShapeProperties props)
+{
+    selectedFilledProperties.border = props;
+}
+void Canvas::updateFilledProperties(Qt::GlobalColor color, Qt::BrushStyle style)
+{
+    selectedFilledProperties.brushColor = color;
+    selectedFilledProperties.brushStyle = style;
+}
+void Canvas::updateTextProperties(jbrush::TextShapeProperties props)
 {
     selectedTextProperties = props;
 }
