@@ -38,6 +38,22 @@ void Polyline::setPoints(const QPoint* const pts, uint32_t count)
         points[i] = pts[i];
 }
 
+void Polyline::addPoint(const QPoint& point)
+{
+    pointCount++;
+
+    QPoint* newPoints = new QPoint[pointCount];
+
+    for(uint32_t i = 0; i < pointCount - 1; i++)
+    {
+        newPoints[i] = points[i];
+    }
+
+    delete[] points;
+    newPoints[pointCount - 1] = point;
+    points = newPoints;
+}
+
 void Polyline::setPoint(uint32_t index, const QPoint& pt)
 {
     if(index < pointCount)

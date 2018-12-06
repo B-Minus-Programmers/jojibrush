@@ -7,6 +7,38 @@ Text::Text(const QPoint& pos, int width, int height, const QString& msg, TextSha
     : Shape(pos), width(width), height(height), text(msg), props(props)
 {}
 
+/* Getters */
+QString Text::getText() const
+{
+    return text;
+}
+
+int Text::getWidth() const
+{
+    return width;
+}
+
+int Text::getHeight() const
+{
+    return height;
+}
+
+/* Setters */
+void Text::setText(const QString& txt)
+{
+    text = txt;
+}
+
+void Text::setWidth(int w)
+{
+    width = w;
+}
+
+void Text::setHeight(int h)
+{
+    height = h;
+}
+
 /* Render */
 void Text::draw(QPainter& qp) const
 {

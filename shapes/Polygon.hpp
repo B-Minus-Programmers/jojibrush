@@ -49,6 +49,13 @@ public:
      */
     void setPoints(const QPoint* const points, uint32_t pointCount);
 
+    /**
+     * Adds a point to the existing set of points
+     * @param point to add
+     */
+    void addPoint(const QPoint&);
+
+
     /* Render */
     virtual void draw(QPainter&) const override;
 

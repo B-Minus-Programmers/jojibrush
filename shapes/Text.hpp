@@ -26,6 +26,18 @@ public:
      */
     QString getText() const;
 
+    /**
+     * Returns the width of the bounding box
+     * @returns width of the bounding box
+     */
+    int getWidth() const;
+
+    /**
+     * Returns the height of the bounding box
+     * @returns height of the bounding box
+     */
+    int getHeight() const;
+
     /* Setters */
     
     /**
@@ -33,6 +45,18 @@ public:
      * @param msg the new contents of the text box
      */
     void setText(const QString&);
+
+    /**
+     * Updates the width of the bounding box
+     * @param width of the bounding box
+     */
+    void setWidth(int);
+
+    /**
+     * Updates the height of the bounding box
+     * @param height of the bounding box
+     */
+    void setHeight(int);
 
     /* Render */
     virtual void draw(QPainter&) const override;
