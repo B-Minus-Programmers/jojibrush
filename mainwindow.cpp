@@ -143,3 +143,8 @@ void MainWindow::on_actionShow_Shape_IDs_toggled(bool checked)
 {
     canvas->setDrawShapeIds(checked);
 }
+void MainWindow::on_actionAbout_Us_triggered()
+{
+    about.setModal(true);
+    about.exec();
+}

@@ -2,6 +2,7 @@
 #include <QMainWindow>
 #include "Canvas.hpp"
 #include "AccountType.hpp"
+#include "AboutUs.hpp"
 
 namespace Ui {
     class MainWindow;
@@ -27,8 +28,11 @@ private slots:
     void on_actionShape_Perimeters_triggered();
     void on_actionExport_triggered();
 
+    void on_actionAbout_Us_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString currentFile;    // Directory of the file containing shapes currently loaded into the program
     jbrush::Canvas* canvas; // Points to the main canvas
+    AboutUs about;
 };

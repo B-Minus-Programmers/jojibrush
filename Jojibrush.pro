@@ -40,7 +40,8 @@ SOURCES += \
         shapes/Polygon.cpp \
         shapes/Line.cpp \
         shapes/Polyline.cpp \
-        shapes/Text.cpp
+        shapes/Text.cpp \
+        AboutUs.cpp
 
 HEADERS += \
         mainwindow.hpp \
@@ -69,11 +70,13 @@ HEADERS += \
         loginwindow.hpp \
         utils/FileHandler.hpp \
         utils/algorithms.hpp \
-        AccountType.hpp
+        AccountType.hpp \
+        AboutUs.hpp
 
 FORMS += \
         mainwindow.ui \
-        loginwindow.ui
+        loginwindow.ui \
+        aboutus.ui
 
 RESOURCES += \
         login.qrc \
