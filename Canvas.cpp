@@ -9,6 +9,13 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent)
     setBackgroundRole(QPalette::Base);
     setAutoFillBackground(true);
     drawShapeIds = true;
+    pGon = nullptr;
+    pLine = nullptr;
+    mLine = nullptr;
+    mRect = nullptr;
+    circ = nullptr;
+    elli = nullptr;
+    text = nullptr;
 }
 
 Canvas::~Canvas()
@@ -75,6 +82,120 @@ void Canvas::clearShapes()
     // Clear out the shape vector
     shapes.clear();
 }
+void Canvas::mousePressEvent(QMouseEvent* event)
+{
+    switch(shapeTypeSelected)
+    {
+        case SelectableShapeType::LINE:
+             mLine = new Line(event->pos(), event->pos(), selectedFilledProperties.border);
+             addShape(mLine);
+        break;
+
+        case SelectableShapeType::POLYLINE:
+        {
+             QPoint point = event->pos();
+
+             if(pLine == nullptr)
+              {
+                 pLine = new Polyline(&point,1, selectedFilledProperties.border);
+                 addShape(pLine);
+              }
+              else
+              {
+                 pLine->addPoint(event->pos());
+              }
+        }
+        break;
+
+        case SelectableShapeType::POLYGON:
+        {
+            QPoint point = event->pos();
+
+            if(pGon == nullptr)
+            {
+                pGon = new Polygon(&point,1, selectedFilledProperties);
+                addShape(pGon);
+            }
+            else
+            {
+                pGon->addPoint(event->pos());
+            }
+        }
+        break;
+
+        case SelectableShapeType::RECTANGLE:
+             mRect = new Rectangle(event->pos(), event->pos(), selectedFilledProperties);
+             addShape(mRect);
+        break;
+
+        case SelectableShapeType::ELLIPSE:
+             elli = new Ellipse(event->pos(),0,0, selectedFilledProperties);
+             addShape(elli);
+        break;
+
+        case SelectableShapeType::CIRCLE:
+             circ = new Circle(event->pos(),0, selectedFilledProperties);
+             addShape(circ);
+        break;
+
+        case SelectableShapeType::TEXT:
+             text = new Text(event->pos(), 100, 100,"", selectedTextProperties);
+             addShape(text);
+        break;
+    }
+    repaint();
+}
+
+void Canvas::mouseMoveEvent(QMouseEvent* event)
+{
+
+    switch(shapeTypeSelected)
+    {
+        case SelectableShapeType::LINE:
+                 mLine->setEnd(event->pos());
+             break;
+
+        case SelectableShapeType::RECTANGLE:
+            mRect->setHeight(event->pos().y() - mRect->getPosition().y());
+            mRect->setWidth(event->pos().x() - mRect->getPosition().x());
+        break;
+
+        case SelectableShapeType::ELLIPSE:
+            elli->setHeight(event->pos().y() - elli->getPosition().y());
+            elli->setWidth(event->pos().x() - elli->getPosition().x());
+        break;
+
+        case SelectableShapeType::CIRCLE:
+        {
+        QPoint point = event->pos() - circ->getPosition();
+        int num = qSqrt(qPow(point.x(),2)+ qPow(point.y(),2));
+
+        circ->setRadius(num);
+        }
+        break;
+
+        case SelectableShapeType::TEXT:
+        {
+
+        if(event->pos().y() > text->getPosition().y())
+        {
+            text->setHeight(event->pos().y() - text->getPosition().y());
+            text->setWidth(event->pos().x() - text->getPosition().x());
+        }
+        else
+        {
+            text->setWidth(text->getPosition().x() - event->pos().x());
+            text->setHeight(text->getPosition().y() - event->pos().y());
+        }
+
+        text->setText("Hello World");
+        }
+        break;
+    }
+
+    //it calls the paintEven() function continuously
+    update();
+}
 
 jbrush::AccountType Canvas::getAccountType() const
 {
@@ -127,7 +248,7 @@ void Canvas::setSelectedTextProperties(jbrush::TextShapeProperties props)
 }
 
 // SLOT DEFINITIONS
-void Canvas::updateShapeType(SelectableShapeType type)
+void Canvas::updateShapeType(jbrush::SelectableShapeType type)
 {
     shapeTypeSelected = type;
 }

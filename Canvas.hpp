@@ -3,10 +3,12 @@
 #include <QPainter>
 #include "utils/vector.hpp"
 #include "utils/FileHandler.hpp"
-#include "shapes/Shape.hpp"
 #include "AccountType.hpp"
 #include "shapes/Properties.hpp"
 #include "menus/shapeselectmenu.hpp"
+#include "shapes/Shapes.hpp"
+#include <QMouseEvent>
+
 
 using jbrush::Vector;
 using jbrush::Shape;
@@ -21,11 +23,17 @@ private:
     jbrush::AccountType accType;
 
     bool drawShapeIds;
+    Line* mLine;
+    Rectangle* mRect;
+    Circle* circ;
+    Ellipse* elli;
+    Text* text;
+    Polygon* pGon;
+    Polyline* pLine;
 
     SelectableShapeType shapeTypeSelected;    // Shape type currently selected by the user
     FilledShapeProperties selectedFilledProperties; // Set of filled shape properties currently selected by the user
-    TextShapeProperties selectedTextProperties; // Set of text properties currently selected by the
-
+    TextShapeProperties selectedTextProperties; // Set of text properties currently selected by the user
 public slots:
     void updateShapeType(SelectableShapeType);
     void updateGeometricProperties(GeometricShapeProperties);   // Update geometric properties with the properties signalled
@@ -57,6 +65,8 @@ public:
     void setSelectedFilledProperties(GeometricShapeProperties, Qt::GlobalColor, Qt::BrushStyle);
     void setSelectedTextProperties(TextShapeProperties);
 protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 };
