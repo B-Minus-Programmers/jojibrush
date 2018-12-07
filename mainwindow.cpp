@@ -112,7 +112,7 @@ void MainWindow::on_actionShape_Id_s_triggered()
         QTextStream qOut(&file);
         file.open(QIODevice::ReadWrite);
         Vector<Shape*> shapes = canvas->getShapes();
-        jbrush::sort(shapes,jbrush::compareId);
+        jbrush::sort(shapes.begin(), shapes.end(), jbrush::compareId);
         Vector<Shape*>::iterator itor = shapes.begin();
 
         while(itor != shapes.end())
@@ -133,7 +133,7 @@ void MainWindow::on_actionShape_Area_s_triggered()
         QTextStream qOut(&file);
         file.open(QIODevice::ReadWrite);
         Vector<Shape*> shapes = canvas->getShapes();
-        jbrush::sort(shapes,jbrush::compareArea);
+        jbrush::sort(shapes.begin(), shapes.end(), jbrush::compareArea);
         Vector<Shape*>::iterator itor = shapes.begin();
 
         while(itor != shapes.end())
@@ -159,7 +159,7 @@ void MainWindow::on_actionShape_Perimeters_triggered()
         QTextStream qOut(&file);
         file.open(QIODevice::ReadWrite);
         Vector<Shape*> shapes = canvas->getShapes();
-        jbrush::sort(shapes,jbrush::comparePerimeter);
+        jbrush::sort(shapes.begin(), shapes.end(), jbrush::comparePerimeter);
         Vector<Shape*>::iterator itor = shapes.begin();
 
         while(itor != shapes.end())
