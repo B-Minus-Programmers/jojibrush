@@ -4,6 +4,7 @@
 #include "Canvas.hpp"
 #include "exceptions.hpp"
 #include "utils/algorithms.hpp"
+#include "shapes/Properties.hpp"
 #include <QString>
 #include <QChar>
 #include <QMap>
@@ -17,7 +18,7 @@ namespace jbrush {
 
 namespace jconstants {
 // Base extension for files used to load from/save to
-const QString FILE_EXTENSION = ".jbrush";
+const QString FILE_TYPE = "Jojibrush files (*.jbrush)";
 
 // Data class member functions expect these strings as identifiers for the shape that is being read in
 const QString LINE = "Line";
@@ -82,6 +83,8 @@ const QMap<QString, QFont::Weight> TEXT_WEIGHT_MAP = {
 class FileHandler
 {
 public:
+    void saveShapesToFile(const Vector<Shape*>&, const QString&);
+        // Outputs the shapes specified to the file specified
     Vector<Shape*> loadShapesFromFile(const QString&);
         // Returns a shape vector from data at the directory specified
 
@@ -90,12 +93,12 @@ private:
     Shape *extractNonText(QTextStream&, QString&, QList<int>&);    // Extract data for a shape that isn't a text, like a line or a square
     Shape *extractText(QTextStream&, QList<int>&);   // Extract all the data needed for a text object
     QList<int> extractDimensions(QTextStream&, const QString&);  // Extract dimensions from the file stream
-    QPen extractPen(QTextStream&);
-    QBrush extractBrush(QTextStream&);
-    QFont extractFont(QTextStream&);  // Extract data on the shape's font from the text stream specified
+    GeometricShapeProperties extractGeometricProperties(QTextStream&);
+    FilledShapeProperties extractFilledProperties(QTextStream&);
+    TextShapeProperties extractTextProperties(QTextStream&);  // Extract data on the shape's font from the text stream specified
 
-    Shape *constructLine(QString&, QList<int>&);  // Construct a line-type using the given data
-    Shape *constructShape(QString&, QList<int>&); // Construct a 2-d type shape with the given data
+    Shape *constructLine(QString&, QList<int>&, GeometricShapeProperties);  // Construct a line-type using the given data
+    Shape *constructShape(QString&, QList<int>&, FilledShapeProperties); // Construct a 2-d type shape with the given data
 
     QPoint *getPoints(QList<int>&);    // Helper function converts a list of integers to a pointer to a block of qpoitns
 

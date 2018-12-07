@@ -2,6 +2,37 @@
 
 namespace jbrush {
 
+void FileHandler::saveShapesToFile(const Vector<Shape *> &shapes, const QString &directory)
+{
+    try
+    {
+        // Create a file at the directory
+        // and create a text stream to operate on it
+        QFile file(directory);
+        QTextStream qin(&file);
+
+        // Will this create a file if none exists already?
+        if(!file.open(QIODevice::WriteOnly))
+        {
+            throw BadFile(file);
+        }
+
+        // Insert each of the shapes into the text stream
+        for(auto shape : shapes)
+        {
+            qin << shape->toQString();
+            qin << endl;
+        }
+
+        // Close out the file
+        file.close();
+    }
+    catch(GeneralException& exception)
+    {
+        exception.errorWindow();
+    }
+}
+
 Vector<Shape*> FileHandler::loadShapesFromFile(const QString& directory)
 {
     Vector<Shape*> shapesToReturn;  // Vector of shapes to be returned by the function
@@ -106,19 +137,18 @@ Shape *FileHandler::extractNonText(QTextStream& qin, QString& shapeType, QList<i
 {
     Shape* shape;    // Shape pointer to be returned by the function
 
-    // Extract data for the pen that draws this shape' edges
-    extractPen(qin);
-
     // If the shape being read in isn't a line, we know it needs a brush
     if(shapeType != jconstants::LINE && shapeType != jconstants::POLYLINE)
     {
         // Extract data for the brush used to fill the insides of this shape
-        extractBrush(qin);
-        shape = constructShape(shapeType, dimensionsList);
+        FilledShapeProperties props = extractFilledProperties(qin);
+        shape = constructShape(shapeType, dimensionsList, props);
     }
     else
     {
-        shape = constructLine(shapeType, dimensionsList);
+        // Extract data for geometric properties of the line
+        GeometricShapeProperties props = extractGeometricProperties(qin);
+        shape = constructLine(shapeType, dimensionsList, props);
     }
 
     return shape;
@@ -127,20 +157,16 @@ Shape *FileHandler::extractNonText(QTextStream& qin, QString& shapeType, QList<i
 Shape *FileHandler::extractText(QTextStream& qin, QList<int>& dimensionsList)
 {
     QString body;   // Body of the text
-    QFont font; // Font of the text
+    TextShapeProperties props; // Font of the text
 
     // Get to the next whitspace, then read in the line as the text's body
     jbrush::getTo(qin, jconstants::TITLE_INTERRUPTOR);
     body = qin.readLine().trimmed();
 
-    // For now, ignore the shape color and shape alignment
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
-
     // Extract the text's font
-    font = extractFont(qin);
+    props = extractTextProperties(qin);
 
-    return new Text(QPoint(dimensionsList[0], dimensionsList[1]), dimensionsList[2], dimensionsList[3], body);
+    return new Text(QPoint(dimensionsList[0], dimensionsList[1]), dimensionsList[2], dimensionsList[3], body, props);
 }
 
 QList<int> FileHandler::extractDimensions(QTextStream& qin, const QString& shapeType)
@@ -161,99 +187,137 @@ QList<int> FileHandler::extractDimensions(QTextStream& qin, const QString& shape
     }while(buffer == jconstants::DIMENSION_INTERRUPTOR && !qin.atEnd());
 
     // Check the dimensions list and throw an exception if there is an error
-    checkDimensions(qin, shapeType, dimensionsList.size());
+    checkDimensions(qin, shapeType, uint8_t(dimensionsList.size()));
 
     return dimensionsList;
 }
 
-// MODIFICATION PENDING IN FUTURE PRODUCT UPGRADES
-QPen FileHandler::extractPen(QTextStream& qin)
+GeometricShapeProperties FileHandler::extractGeometricProperties(QTextStream& qin)
 {
-    QPen pen;
+    GeometricShapeProperties props;
+    QString bufferString;
+    int bufferInt;
+
+    // Extract the color of the pen
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> bufferString;
+    props.penColor = jconstants::COLOR_MAP[bufferString];
+
+    // Extract the width of the pen
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> bufferInt;
+    props.penWidth = uint8_t(bufferInt);
+
+    // Extract the pen's style
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> bufferString;
+    props.penStyle = jconstants::PEN_STYLE_MAP[bufferString];
+
+    // Extract the pen cap style
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> bufferString;
+    props.penCapStyle = jconstants::PEN_CAP_MAP[bufferString];
+
+    // Extract the join style for the pen
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> bufferString;
+    props.penJoinStyle = jconstants::PEN_JOIN_MAP[bufferString];
+
+    return props;
+}
+
+FilledShapeProperties FileHandler::extractFilledProperties(QTextStream& qin)
+{
+    FilledShapeProperties props;
     QString buffer;
 
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    // Extract properties for the border of the shape
+    props.border = extractGeometricProperties(qin);
 
-    return pen;
-}
-// MODIFICATION PENDING IN FUTURE PRODUCT UPGRADES
-QBrush FileHandler::extractBrush(QTextStream& qin)
-{
-    QBrush brush;
-    QString buffer;
-
+    // Extract the color for the brush
     getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> buffer;
+    props.brushColor = jconstants::COLOR_MAP[buffer];
 
-    return brush;
+    // Extract the style for the brush
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> buffer;
+    props.brushStyle = jconstants::BRUSH_STYLE_MAP[buffer];
+
+    return props;
 }
 
-QFont FileHandler::extractFont(QTextStream& qin)
+TextShapeProperties FileHandler::extractTextProperties(QTextStream& qin)
 {
-    QFont font;
+    TextShapeProperties props;
     int pointSize; // Temporary storage for an integer
     QString stringExtracted; // Temporary storage for a string
+
+    // Extract text's color
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> stringExtracted;
+    props.textColor = jconstants::COLOR_MAP[stringExtracted];
+
+    // Extract text's alignment
+    getTo(qin, jconstants::TITLE_INTERRUPTOR);
+    qin >> stringExtracted;
+    props.textAlignment = jconstants::TEXT_ALIGN_MAP[stringExtracted];
 
     // Get text size
     getTo(qin, jconstants::TITLE_INTERRUPTOR);
     qin >> pointSize;
-    font.setPointSize(pointSize);
+    props.textSize = int8_t(pointSize);
 
     // Get font family
     getTo(qin, jconstants::TITLE_INTERRUPTOR);
-    stringExtracted = qin.readLine().trimmed();
-    font.setFamily(stringExtracted);
+    props.textFontFamily = qin.readLine().trimmed();
 
     // Get font style
     getTo(qin, jconstants::TITLE_INTERRUPTOR);
     qin >> stringExtracted;
-    font.setStyle(jconstants::TEXT_STYLE_MAP[stringExtracted]);
+    props.textFontStyle = jconstants::TEXT_STYLE_MAP[stringExtracted];
 
     // Get font weight
     getTo(qin, jconstants::TITLE_INTERRUPTOR);
     qin >> stringExtracted;
-    font.setWeight(jconstants::TEXT_WEIGHT_MAP[stringExtracted]);
+    props.textFontWeight = jconstants::TEXT_WEIGHT_MAP[stringExtracted];
 
-    return font;
+    return props;
 }
 
-Shape *FileHandler::constructLine(QString& type, QList<int>& dimensions)
+Shape *FileHandler::constructLine(QString& type, QList<int>& dimensions, GeometricShapeProperties props)
 {
     if(type == jconstants::LINE)
     {
-       return new Line(QPoint(dimensions[0], dimensions[1]), QPoint(dimensions[2], dimensions[3]));
+       return new Line(QPoint(dimensions[0], dimensions[1]), QPoint(dimensions[2], dimensions[3]), props);
     }
     else
     {
-        return new Polyline(getPoints(dimensions), uint32_t(dimensions.size() / 2));
+        return new Polyline(getPoints(dimensions), uint32_t(dimensions.size() / 2), props);
     }
 }
 
-Shape *FileHandler::constructShape(QString& type, QList<int>& dimensions)
+Shape *FileHandler::constructShape(QString& type, QList<int>& dimensions, FilledShapeProperties props)
 {
     if(type == jconstants::POLYGON)
     {
-        return new Polygon(getPoints(dimensions), uint32_t(dimensions.size() / 2));
+        return new Polygon(getPoints(dimensions), uint32_t(dimensions.size() / 2), props);
     }
     else if(type == jconstants::RECTANGLE)
     {
-        return new Rectangle(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[3]);
+        return new Rectangle(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[3], props);
     }
     else if(type == jconstants::SQUARE)
     {
-        return new Rectangle(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[2]);
+        return new Rectangle(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[2], props);
     }
     else if(type == jconstants::ELLIPSE)
     {
-        return new Ellipse(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[3]);
+        return new Ellipse(QPoint(dimensions[0], dimensions[1]), dimensions[2], dimensions[3], props);
     }
     else
     {
-        return new Circle(QPoint(dimensions[0], dimensions[1]), dimensions[2]);
+        return new Circle(QPoint(dimensions[0], dimensions[1]), dimensions[2], props);
     }
 }
 

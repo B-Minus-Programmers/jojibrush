@@ -298,7 +298,7 @@ Vector<T>& Vector<T>::operator=(const Vector& vec)
     array = new T[vec.capacity];
     capacity = vec.capacity;
     size = vec.size;
-    
+
     //Deep copy elements from other vector
     for (uint32_t i = 0; i < vec.size; i++)
     {

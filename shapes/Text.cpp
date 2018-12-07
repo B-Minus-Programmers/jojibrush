@@ -75,7 +75,9 @@ std::string Text::toString() const
            "ShapeType: Text\r\n" +
            "ShapeDimensions: " +
            std::to_string(position.x())  + ", " +
-           std::to_string(position.y())  + "\r\n" +
+           std::to_string(position.y())  + ", " +
+           std::to_string(width)         + ", " +
+           std::to_string(height)        + "\r\n" +
            "TextString: " + text.toStdString() + "\r\n" +
            stringifyProperties() + "\r\n";
 }

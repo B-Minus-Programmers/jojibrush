@@ -3,6 +3,7 @@
 #include "Canvas.hpp"
 #include "shapes/Shapes.hpp"
 #include "shapes/Rectangle.hpp"
+#include "utils/FileHandler.hpp"
 
 using jbrush::Canvas;
 
@@ -49,12 +50,53 @@ void MainWindow::setAccountType(jbrush::AccountType type)
     canvas->setAccountType(type);
 }
 
+void MainWindow::on_actionSave_triggered()
+{
+    jbrush::FileHandler fileUtil;
+
+    // If there is a current file,save to it
+    if(!currentFile.isEmpty())
+    {
+        fileUtil.saveShapesToFile(canvas->getShapes(), currentFile);
+    }
+    // Otherwise, ask the user to select one, then set it to that file
+    else
+    {
+        // Get the name of the file the user wants to save
+        QString fileDir = QFileDialog::getSaveFileName(this, "Save File", currentFile, jbrush::jconstants::FILE_TYPE);
+
+        // If a file was selected, save to that file
+        if(!fileDir.isEmpty())
+        {
+            fileUtil.saveShapesToFile(canvas->getShapes(), fileDir);
+            currentFile = fileDir;
+        }
+    }
+}
+
+void MainWindow::on_actionSaveAs_triggered()
+{
+    // Get the name of the file the user wants to save
+    QString fileDir = QFileDialog::getSaveFileName(this, "Save File", currentFile, jbrush::jconstants::FILE_TYPE);
+
+    // If a file directory was specified, save to it and update the current file
+    if(!fileDir.isEmpty())
+    {
+        jbrush::FileHandler fileUtil;
+        fileUtil.saveShapesToFile(canvas->getShapes(), fileDir);
+
+        // If the current file hasn't been set yet, set it to the file specified by the user
+        if(currentFile.isEmpty())
+        {
+            currentFile = fileDir;
+        }
+    }
+}
+
 void MainWindow::on_actionLoad_triggered()
 {
-    QString fileDir;    // Directory of the file to load
-
-    // Bring up a panel for the user to select a directory
-    fileDir = QFileDialog::getOpenFileName(this, "Open", currentFile, "Jojibrush files (*" + jbrush::jconstants::FILE_EXTENSION + ")");
+    // Use a file dialog to get a file to load from
+    QString fileDir = QFileDialog::getOpenFileName(this, "Open", currentFile, jbrush::jconstants::FILE_TYPE);
 
     // If loading to the canvas is successful, update the current file
     if(!fileDir.isEmpty())

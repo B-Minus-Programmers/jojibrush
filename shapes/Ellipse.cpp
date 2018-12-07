@@ -61,8 +61,8 @@ std::string Ellipse::toString() const
            "ShapeDimensions: " +
            std::to_string(position.x()) + ", " +
            std::to_string(position.y()) + ", " +
-           std::to_string(width / 2)    + ", " +
-           std::to_string(height / 2)   + "\r\n" +
+           std::to_string(width)    + ", " +
+           std::to_string(height)   + "\r\n" +
            stringifyProperties() + "\r\n";
 }
 }

@@ -22,10 +22,10 @@ public:
     // Set the account type on the canvas
     void setAccountType(jbrush::AccountType);
 
-public slots:
-    void updatePropertiesMenus();
-
 private slots:
+    void on_actionLoad_triggered();
+    void on_actionSave_triggered();
+    void on_actionSaveAs_triggered();
     void on_actionShow_Shape_IDs_toggled(bool);
 
     void on_actionShape_Id_s_triggered();
@@ -34,7 +34,6 @@ private slots:
     void on_actionExport_triggered();
 
     void on_actionAbout_Us_triggered();
-    void on_actionLoad_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -53,5 +52,5 @@ private:
     void connectSignalsAndSlots();
 
     // Display the correct set of selectable properties depending on the shape type selected to add
-    //void updatePropertiesMenus();
+    void updatePropertiesMenus();
 };
