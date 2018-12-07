@@ -150,6 +150,7 @@ void Canvas::mousePressEvent(QMouseEvent* event)
 
 void Canvas::mouseMoveEvent(QMouseEvent* event)
 {
+    if (getAccountType() != AccountType::ADMIN) return;
 
     switch(shapeTypeSelected)
     {
