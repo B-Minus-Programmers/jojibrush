@@ -84,6 +84,8 @@ void Canvas::clearShapes()
 }
 void Canvas::mousePressEvent(QMouseEvent* event)
 {
+    if (getAccountType() != AccountType::ADMIN) return;
+
     switch(shapeTypeSelected)
     {
         case SelectableShapeType::LINE:
