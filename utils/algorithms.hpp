@@ -11,22 +11,19 @@ using jbrush::Shape;
 
 namespace jbrush {
 
-template <typename T>
-using Comparator = std::function<int(const T, const T)>;
-
 int compareId(const Shape*, const Shape*);
 int compareArea(const Shape*, const Shape*);
 int comparePerimeter(const Shape*, const Shape*);
 
 template <typename T>
-void sort(typename Vector<T>::iterator, typename Vector<T>::iterator, Comparator<T> = compareId);
+void sort(T*, T*, std::function<int(const T, const T)> = compareId);
 
 void getTo(QTextStream&, const QChar&);
 
 template <typename T>
-void sort(typename Vector<T>::iterator start, typename Vector<T>::iterator end, Comparator<T> cmp)
+void sort(T* start, T* end, std::function<int(const T, const T)> cmp)
 {
-    typename Vector<T>::iterator min;
+    T* min;
 
     while (start != end)
     {
