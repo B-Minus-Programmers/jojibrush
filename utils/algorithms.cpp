@@ -1,7 +1,5 @@
 #include "algorithms.hpp"
 
-using jbrush::Comparator;
-
 namespace jbrush {
 
 int compareId(const Shape* a, const Shape* b)

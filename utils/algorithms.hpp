@@ -15,24 +15,19 @@ int compareId(const Shape*, const Shape*);
 int compareArea(const Shape*, const Shape*);
 int comparePerimeter(const Shape*, const Shape*);
 
-template <typename T>
-void sort(T*, T*, std::function<int(const T, const T)> = compareId);
-
 void getTo(QTextStream&, const QChar&);
 
 template <typename T>
-void sort(T* start, T* end, std::function<int(const T, const T)> cmp)
+void sort(T* start, T* end, std::function<int(const Shape*, const Shape*)> cmp)
 {
     T* min;
-
-    while (start != end)
+    for(T* tmp = start; tmp != end; ++tmp)
     {
-        if (cmp(*start, *min) < 0)
+        min = tmp;
+        for(T* tmp2 = tmp + 1; tmp2 != end; ++tmp2)
         {
-            min = start;
+          if(cmp(*tmp2, *min) < 0) std::swap(*tmp2, *min);
         }
-
-        std::iter_swap(min, start);
     }
 }
 }
